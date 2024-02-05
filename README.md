@@ -12,7 +12,7 @@ https://github.com/stefanos50/thesis_test_repository/assets/36155283/0ac23215-38
 
 ### Features
 
-* Out-of-the-box compatibility, and code for training an enhanced model from CARLA to any real or synthetic dataset.
+* Out-of-the-box compatibility, and code for training an enhancement model from CARLA to any real or synthetic dataset.
 * Code for extracting a synthetic dataset (including G-Buffers) in synchronization mode.
 * Parameterization from a yaml config file rather than directly interacting with the code.
 * Dataset generation of RGB and their corresponding enhanced frames with annotations for Semantic Segmentation, Object Detection, and Autonomous Driving.
@@ -24,7 +24,7 @@ https://github.com/stefanos50/thesis_test_repository/assets/36155283/0ac23215-38
 ### Data
 This section provides a short summary of all the available data that are provided and are available for download through Google Drive (Original Frames, Enhanced Frames, and Ground Truth Annotations).
 
-1. [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1MOdLnoyb3zvyDq9M4x-kr_2CddFYup5d/view?usp=sharing)
+1. [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
 2. [**CARLA2Cityscapes**](https://drive.google.com/file/d/1Fj8WsWWzPVoNBez8Glgw65GGXAg9eIzM/view?usp=drive_link)
 3. [**CARLA2KITTI**](https://drive.google.com/file/d/18KQW_KeA9HhyF2A6jwCRnhVvbW3CA3qf/view?usp=drive_link)
 4. [**CARLA2GTA**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link)
@@ -34,7 +34,7 @@ This section provides a short summary of all the available data that are provide
 If you used the CARLA2Real tool or any dataset from this repository in a scientific publication, we would appreciate using the following citations:
 
 ```
-The paper will be published soon.
+Our paper will be published soon.
 
 @Article{Richter_2021,
                     title = {Enhancing Photorealism Enhancement},
