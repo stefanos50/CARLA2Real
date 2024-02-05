@@ -13,7 +13,7 @@ https://github.com/stefanos50/thesis_test_repository/assets/36155283/0ac23215-38
 ### Features
 
 * Out-of-the-box compatibility, and code for training an enhancement model from CARLA to any real or synthetic dataset.
-* Code for extracting a synthetic dataset (including G-Buffers) in synchronization mode.
+* Code for extracting a synthetic dataset (including G-Buffers) in synchronous mode.
 * Parameterization from a yaml config file rather than directly interacting with the code.
 * Dataset generation of RGB and their corresponding enhanced frames with annotations for Semantic Segmentation, Object Detection, and Autonomous Driving.
 * A simplified version of the scenario runner for creating specific scenarios.
