@@ -99,8 +99,6 @@ pip install onnxruntime-gpu
 
 > ⚠️ **Warning**: The project has been tested with the latest versions of [PyTorch](https://pytorch.org/) compiled with CUDA 11.7 and 11.8. For Ada Lovelace/Hopper architectures, using CUDA version <11.8 may result in significant performance loss. Building PyTorch with CUDA is mandatory, as CPU inference is not supported. ONNX Runtime and TensorRT may require different version based on the installed CUDA development kit version.
 
-![CARLA2Cityscapes](https://drive.google.com/uc?export=view&id=1ulcGr6WYo13uVe80bcdo4dZA1sFAOtLT )
-
 ### Installing TensorRT
 
 Nvidia's TensorRT is utilized to optimize and improve inference performance for handling a model of this size. While installing PyTorch and ONNX Runtime is straightforward using `pip install`, TensorRT requires additional steps for installation. Begin by checking if your hardware supports TensorRT and identifying any other dependencies required based on your hardware configuration. For instance, RTX 4090 works only with CUDA 11.8 (or newer) for TensorRT. Refer to the [**TensorRT support matrix**](https://docs.nvidia.com/deeplearning/tensorrt/support-matrix/index.html) for compatibility information.
