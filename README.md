@@ -152,6 +152,13 @@ For a detailed understanding of how to train with your own dataset and generate 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
 ![GBUFFERS](https://drive.google.com/uc?export=view&id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV )
+
+After setting up the dataset, the txt files with the data paths and the patch-matching-generated files modify the `\code\config\train_pfd2cs.yaml` accordingly and run the following command to start the training procedure:
+
+```javascript
+python EPEExperiment.py train <path-to>\code\config\train_pfd2cs.yaml --log=info
+```
+
 # Testing
 
 To translate an existing CARLA dataset outside the simulator after setting the desired model in `\code\config\test_pfd2cs.yaml` execute the following command:
@@ -166,7 +173,7 @@ The input frames should be in text format. To generate such a txt file, you can 
 
 # Real-Time Inference
 
-To enhance the output of the CARLA simulator in real-time, ensure that CARLA is running either after building from source inside Unreal Engine 4 or by executing the CARLA executable. Then, execute the following command:
+To enhance the output of the CARLA simulator in real-time, ensure that CARLA is running either after building from source inside Unreal Engine 4 or by executing the CARLA executable. Then, after setting the desired model in `\code\config\infer_pfd2cs.yaml` (`weight_dir` and `name_load` parameters), execute the following command:
 
 ```javascript
 python EPEExperiment.py infer <path-to>\code\config\infer_pfd2cs.yaml --log=info --carla_config <path-to>/code/config/carla_config.yaml
@@ -240,10 +247,7 @@ In the case of building an ONNX file, it can take up to more than 100GB of syste
 
 > 📝 **Note**: For INT8 precision, we had to manually set a significant part of the network, particularly the section that processes the G-Buffers, to FP16 to maintain high quality. As a result, the improvement in performance is relatively small.
 
-> ⚠️ **Warning**: We provide prebuilt ONNX pre-trained models and TensorRT engines, although if you change the default camera resolution (960x540), you need to regenerate all the required files to the new specified resolution. Moreover, it's critical that CARLA version 0.9.14 in Windows operating systems work only with resolutions that are aligned to 256.
-
-> ⚠️ **Warning**: NVIDIA's TensorRT can result in issues when exporting ONNX files. We recommend disabling it in that particular case.
-
+> ⚠️ **Warning**: NVIDIA's TensorRT can result in issues when exporting ONNX files. We recommend selecting PyTorch or ONNX Runtime from the `compiler` parameter in that particular case.
 ### Data Augmentation
 
 In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. The model trained on this translated dataset is included alongside other photorealistic models and can serve as an augmentation method. Similar to Cityscapes, we provide a small [**sample dataset**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link) with translated images from CARLA to GTA V (Grand Theft Auto V). 
