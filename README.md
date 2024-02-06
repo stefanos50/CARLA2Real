@@ -10,6 +10,10 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 
 ![Results](https://drive.google.com/uc?export=view&id=1MhYfYPcL1MrK67tgpVj78Xd5Fr-T0T69)
 
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1MhYfYPcL1MrK67tgpVj78Xd5Fr-T0T69" alt="Image" width="300px" height="auto">
+</div>
+
 ### Features
 
 * Out-of-the-box compatibility, and code for training an enhancement model from CARLA to any real or synthetic dataset.
