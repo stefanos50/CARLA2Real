@@ -3,7 +3,7 @@
 
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
-![Project Pipeline](https://drive.google.com/uc?export=view&id=1nnBIp1JD9QGzsk42XoZjoBKBVeH74b8- )
+![Results](https://drive.google.com/uc?export=view&id=1MhYfYPcL1MrK67tgpVj78Xd5Fr-T0T69)
 
 ### Objective
 The primary aim of this project is to enhance the photorealism of the CARLA simulator output in real-time. Leveraging the [**Enhancing Photorealism Enhancement**](https://github.com/isl-org/PhotorealismEnhancement) project developed by Intel Labs, our goal is to reduce the SIM2REAL appearance gap. This gap is persistent when training Deep Learning (DL) algorithms in the simulator and deploying them in real-world scenarios.
