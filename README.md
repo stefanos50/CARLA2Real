@@ -59,7 +59,7 @@ This project was developed on a system equipped with an RTX 4090 24GB GPU, an In
 To attain optimal performance in asynchronous mode, where the GPU has to render CARLA at a high refresh rate while performing inference on the enhanced model, multi-GPUs are recommended. Exploring parameters that are most suitable for your hardware is advisable, as other options, such as asynchronous data transfer, may result in high requirements for other components like the CPU.
 
 ### Operating System
-The operating system used and tested for this project was Windows 11. However, it should work well with all the other [CARLA simulator-supported operating systems](https://carla.readthedocs.io/en/latest/).
+The operating system used and tested for this project was Windows 11. However, it should be compatible with all the other [CARLA simulator-supported operating systems](https://carla.readthedocs.io/en/latest/).
 
 ### Installing CARLA
 This project is based on the `listen_to_gbuffer()` API method that extracts and sends the G-Buffers that are utilized by the enhancement model to the Python client. This was introduced in CARLA 0.9.14, so this project won't work in older versions. You can download CARLA 0.9.14 from [here](https://carla.org/2022/12/23/release-0.9.14/).
