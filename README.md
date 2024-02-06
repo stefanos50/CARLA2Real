@@ -154,7 +154,7 @@ For a detailed understanding of how to train with your own dataset and generate 
 ![GBUFFERS](https://drive.google.com/uc?export=view&id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV )
 # Testing
 
-To translate an existing CARLA dataset outside the simulator after setting the desired model in `\code\config\test_pfd2cs.yaml` execute the command:
+To translate an existing CARLA dataset outside the simulator after setting the desired model in `\code\config\test_pfd2cs.yaml` execute the following command:
 
 ```javascript
 python EPEExperiment.py test <path-to>\code\config\test_pfd2cs.yaml --log=info
