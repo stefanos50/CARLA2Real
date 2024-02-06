@@ -34,7 +34,14 @@ This section provides a short summary of all the available data that are provide
 If you used the CARLA2Real tool or any dataset from this repository in a scientific publication, we would appreciate using the following citations:
 
 ```
-Our paper will be published soon.
+The paper associated with this code has not yet been published. Please cite this repository if you use the code.
+% Placeholder citation
+@article{author_year,
+  title = {CARLA2Real: a tool for reducing the sim2real gap in CARLA simulator},
+  author = {Stefanos Pasios, Nikos Nikolaidis},
+  journal = {Unpublished},
+  year = {Year},
+}
 
 @Article{Richter_2021,
                     title = {Enhancing Photorealism Enhancement},
