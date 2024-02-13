@@ -4,7 +4,7 @@
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
 <div align="center">
-  <img src="https://drive.google.com/uc?export=view&id=1nnBIp1JD9QGzsk42XoZjoBKBVeH74b8-" alt="Image" width="720px" height="auto">
+  <img src="https://drive.google.com/thumbnail?id=1nnBIp1JD9QGzsk42XoZjoBKBVeH74b8-&sz=w1000" alt="Image" width="720px" height="auto">
 </div>
 
 ### Objective
@@ -153,7 +153,7 @@ For a detailed understanding of how to train with your own dataset and generate 
 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
-![GBUFFERS](https://drive.google.com/uc?export=view&id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV )
+![GBUFFERS](https://drive.google.com/thumbnail?id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV&sz=w1000)
 
 After setting up the dataset, the txt files with the data paths and the patch-matching-generated files modify the `\code\config\train_pfd2cs.yaml` accordingly and run the following command to start the training procedure:
 
@@ -196,7 +196,7 @@ Various data can be exported, including frames, information about the world (wea
 
 When exporting datasets, a common approach is to save data for every number of frames. This can be done by changing the parameter `skip_frames`. Exporting frames when the car is stuck at a traffic light or in any other location can be problematic because the dataset will end up with multiple frames containing the same information. For such cases, we provide the parameters `capture_when_static` and `speed_threshold`. If the parameter is set to false, then if the ego vehicle is static, data will not be saved. Also, by thresholding the speed of the vehicle, you can avoid exporting data if the vehicle is moving at a very slow speed to prevent having data that are very close. Adjust these parameters in the `\code\config\carla_config.yaml` file.
 
-![Annotations](https://drive.google.com/uc?export=view&id=1NvzD1kOVAEG4j6MA9mcW2MV2WpoGay75 )
+![Annotations](https://drive.google.com/thumbnail?id=1NvzD1kOVAEG4j6MA9mcW2MV2WpoGay75&sz=w1000)
 
 ### Semantic Segmentation
 
@@ -254,7 +254,7 @@ In the case of building an ONNX file, it can take up to more than 100GB of syste
 
 In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. Similar to the real datasets, we provide a small [**sample dataset**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link) with translated images from CARLA to GTA V (Grand Theft Auto V). 
 
-![carla2gta](https://drive.google.com/uc?export=view&id=1wCrzvFQcNsWVI44A12yQOnR8CEmgoJ90)
+![carla2gta](https://drive.google.com/thumbnail?id=1wCrzvFQcNsWVI44A12yQOnR8CEmgoJ90&sz=w1000)
 
 ### Adding a New Sensor
 
