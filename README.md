@@ -6,6 +6,9 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 ![carla2cs](https://github.com/stefanos50/thesis2/assets/36155283/3ddc098e-b4d4-4627-a41d-de38fdecbb41) ![carla2kitti](https://github.com/stefanos50/thesis2/assets/36155283/ca15c0f2-e1d7-48a7-841b-6436e235d879)
 
+<div align="center">
+  <img src="https://drive.google.com/thumbnail?id=1us-sVe9OmYunOtHQrqWjD8uJoOyYDY57&sz=w1000" alt="Image" width="320px" height="auto">
+</div>
 
 <div align="center">
   <img src="https://drive.google.com/thumbnail?id=1nnBIp1JD9QGzsk42XoZjoBKBVeH74b8-&sz=w1000" alt="Image" width="720px" height="auto">
