@@ -19,9 +19,9 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * Dataset generation of RGB and their corresponding enhanced frames with annotations for Semantic Segmentation, Object Detection, and Autonomous Driving.
 * A simplified version of the scenario runner for creating specific scenarios.
 * Support for implementing and evaluating autonomous driving algorithms or tasks (such as semantic segmentation, object detection, etc.) through simplified subscripts for code simplicity and easier integration into a unified structure.
-* Support for different compilers (Pytorch, ONNX Runtime, TensorRT) based on ONNX structure to accommodate various data types (FP32, FP16, TF16, and INT8), enhancing performance and expanding compatibility with a wide range of supported hardware.
-* Support for synchronous and asynchronous modes.
+* Support for different compilers (Pytorch, ONNX Runtime, TensorRT) based on ONNX structure and various data types (FP32, FP16, TF16, and INT8).
 * Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes.
+* Support for synchronous and asynchronous modes.
 
 ### Data & Pre-trained Models
 This section provides a short summary of all the available data and pre-trained models that are provided and are available for download through Google Drive. The following sections will further describe the required procedure for employing these data.
@@ -111,7 +111,7 @@ pip install onnxruntime-gpu
 
 ### Installing Pre-Trained models
 
-The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (after training your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
+The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (if you trained your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
 
 ### Installing TensorRT
 
