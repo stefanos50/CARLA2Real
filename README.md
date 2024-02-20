@@ -22,13 +22,21 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * Support for different compilers (Pytorch, ONNX Runtime, TensorRT) based on ONNX structure to accommodate various data types (FP32, FP16, TF16, and INT8), enhancing performance and expanding compatibility with a wide range of supported hardware.
 * Support for synchronous and asynchronous modes.
 
-### Data
-This section provides a short summary of all the available data that are provided and are available for download through Google Drive (Original Frames, Enhanced Frames, and Ground Truth Annotations).
+### Data & Pre-trained Models
+This section provides a short summary of all the available data and pre-trained models that are provided and are available for download through Google Drive. The following sections will further describe the required procedure for employing these data.
 
-1. [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
-2. [**CARLA2Cityscapes**](https://drive.google.com/file/d/1Fj8WsWWzPVoNBez8Glgw65GGXAg9eIzM/view?usp=drive_link)
-3. [**CARLA2KITTI**](https://drive.google.com/file/d/18KQW_KeA9HhyF2A6jwCRnhVvbW3CA3qf/view?usp=drive_link)
-4. [**CARLA2GTA**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link)
+1. Enhanced CARLA Datasets
+   - CARLA frames before and after applying the [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) approach along with various annotations, including semantic segmentation and object detection.
+     - [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
+     - [**CARLA2Cityscapes**](https://drive.google.com/file/d/1Fj8WsWWzPVoNBez8Glgw65GGXAg9eIzM/view?usp=drive_link)
+     - [**CARLA2KITTI**](https://drive.google.com/file/d/18KQW_KeA9HhyF2A6jwCRnhVvbW3CA3qf/view?usp=drive_link)
+     - [**CARLA2GTA**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link)
+2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
+   - Pre-trained (.pth, ONNX, and TensorRT engines) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
+     - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
+3. Autonomous Driving
+   - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
+     - [**Autonomous Driving Pre-trained Models**](https://drive.google.com/drive/folders/1ji2lymOjqbNDVS2VExZrSuJtFMaBZ9dI?usp=drive_link)  
 
 ### BibTeX Citation
 
@@ -99,6 +107,10 @@ pip install onnxruntime-gpu
 ```
 
 > ⚠️ **Warning**: The project has been tested with the latest versions of [PyTorch](https://pytorch.org/) compiled with CUDA 11.7 and 11.8. For Ada Lovelace/Hopper architectures, using CUDA version <11.8 may result in significant performance loss. Building PyTorch with CUDA is mandatory, as CPU inference is not supported. ONNX Runtime and TensorRT may require different version based on the installed CUDA development kit version.
+
+### Installing Pre-Trained models
+
+The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (after training your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
 
 ### Installing TensorRT
 
