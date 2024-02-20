@@ -128,12 +128,14 @@ If your hardware supports TensorRT, follow the [**installation guide**](https://
 For training CARLA on another target dataset, we provide a dataset generation script that can export frames, G-buffers, and ground truth label maps in synchronous mode, along with various functionalities that introduce diversity. To create your own synthetic dataset, execute the following commands after running CARLA:
 
 ```javascript
-cd /d K:\code\epe\dataset_generation
+cd /d <path-to>\code\epe\dataset_generation
+%example command
 python generate_dataset.py --save_path E:\ --ticks_per_frame 10 --perspective 0 --randomize_lights True --town Town10HD
 ```
 The data are extracted as PNG images to preserve their utilization on a wider variety of models. To transform them to a compatible format directly for the Enhancing Photorealism Enhancement model, we provide a set of preprocessing scripts with the following commands:
 
 ```javascript
+%example commands
 python LabelMapPreprocess.py --label_map_directory E:\CarlaDataset\SemanticSegmentation --save_path E:\CarlaDataset\SemanticEPE
 python GBuffersPreprocess.py --g_buffer_directory E:\CarlaDataset\GBuffersCompressed\ --save_path E:\CarlaDataset\GBuffersEPE\
 ```
