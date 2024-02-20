@@ -21,6 +21,7 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * Support for implementing and evaluating autonomous driving algorithms or tasks (such as semantic segmentation, object detection, etc.) through simplified subscripts for code simplicity and easier integration into a unified structure.
 * Support for different compilers (Pytorch, ONNX Runtime, TensorRT) based on ONNX structure to accommodate various data types (FP32, FP16, TF16, and INT8), enhancing performance and expanding compatibility with a wide range of supported hardware.
 * Support for synchronous and asynchronous modes.
+* Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes.
 
 ### Data & Pre-trained Models
 This section provides a short summary of all the available data and pre-trained models that are provided and are available for download through Google Drive. The following sections will further describe the required procedure for employing these data.
@@ -32,7 +33,7 @@ This section provides a short summary of all the available data and pre-trained 
      - [**CARLA2KITTI**](https://drive.google.com/file/d/18KQW_KeA9HhyF2A6jwCRnhVvbW3CA3qf/view?usp=drive_link)
      - [**CARLA2GTA**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link)
 2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
-   - Pre-trained (.pth, ONNX, and TensorRT engines) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
+   - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
      - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
 3. Autonomous Driving
    - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
