@@ -4,8 +4,8 @@
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
 <div align="center">
-  <img src="https://drive.google.com/thumbnail?id=1bPh0TT3qOhDwCdJHPfCUyfOnZ1zZ_xp1&sz=w1000" alt="Image" width="320px" height="auto">
-  <img src="https://drive.google.com/thumbnail?id=1us-sVe9OmYunOtHQrqWjD8uJoOyYDY57&sz=w1000" alt="Image" width="320px" height="auto">
+  <img src="https://drive.google.com/thumbnail?id=1bPh0TT3qOhDwCdJHPfCUyfOnZ1zZ_xp1&sz=w1000" alt="Image" width="400px" height="auto">
+  <img src="https://drive.google.com/thumbnail?id=1us-sVe9OmYunOtHQrqWjD8uJoOyYDY57&sz=w1000" alt="Image" width="400px" height="auto">
 </div>
 
 ### Objective
