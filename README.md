@@ -230,7 +230,7 @@ For object detection, we offer nine distinct classes: `person, vehicle, truck, b
 
 ### Scenarios
 
-We offer the creation of simple scenarios through a configuration (YAML) file, which can be set in `/code/config/carla_config.yaml` under the `scenario` parameter. Samples of such scenarios and their expected structure can be found within `/code/scenarios`. The scenarios can range from spawning a vehicle at a random or fixed location to creating a static obstacle for the ego vehicle to avoid, setting up a distance-based trigger between another object (vehicle or person) as a moving obstacle, manipulating traffic lights, or following a leading vehicle. Many parameters require coordinates, so it is suggested to build CARLA from source to extract coordinates through the engine. Additionally, when using scenarios that involve triggers, it is recommended to run in `synchronous mode`.
+We offer the creation of simple scenarios through a configuration (YAML) file, which can be set in `/code/config/carla_config.yaml` under the `scenario` parameter. Samples of such scenarios and their expected structure can be found within `/code/scenarios`. The scenarios can range from spawning a vehicle at a random or fixed location to creating a static obstacle for the ego vehicle to avoid, setting up a distance-based trigger between another object (vehicle or person) as a moving obstacle, manipulating traffic lights, or following a leading vehicle. Many of the parameters require coordinates, so it is suggested to build CARLA from source to extract coordinates through the engine. Additionally, when using scenarios that involve triggers, it is recommended to run in `synchronous mode`.
 
 ```javascript
 cross_road_town10.yaml example
