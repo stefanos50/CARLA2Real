@@ -19,7 +19,7 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * Dataset generation of RGB and their corresponding enhanced frames with annotations for Semantic Segmentation, Object Detection, and Autonomous Driving.
 * A simplified version of the scenario runner for creating specific scenarios.
 * Support for implementing and evaluating autonomous driving algorithms or tasks (such as semantic segmentation, object detection, etc.) through simplified subscripts for code simplicity and easier integration.
-* Support for different compilers (Pytorch, ONNX Runtime, TensorRT) based on ONNX structure and various data types (FP32, FP16, TF16, and INT8).
+* Support for different compilers (Pytorch, ONNX Runtime, and TensorRT) based on ONNX structure and various data types (FP32, FP16, TF16, and INT8).
 * Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes.
 * Support for synchronous and asynchronous modes.
 
