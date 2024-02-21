@@ -259,7 +259,7 @@ The implementation currently supports inference with three different compilers: 
 
 In the case of building an ONNX file, it can take up to more than 100GB of system memory. In that case, if the system memory is insufficient but there is enough memory available on disk, then it will succeed after some time. In the case of TensorRT, building the engine or calibrating can also take some time, but the memory requirements are lower. Based on our experiments, we recommend using `TensorRT` with `FP16 precision` as it gives the best performance, quality, and memory ratio.
 
-> ⚠️ **Warning**: ONNX Runtime with FP16 precision introduces image artifacts. It is recommended to use ONNX Runtime only if you want to achieve faster inference in FP32 with the tradeoff of high GPU memory requirements.
+> ⚠️ **Warning**: ONNX Runtime with FP16 precision introduces artifacts in the image. It is recommended to use ONNX Runtime only if you want to achieve faster inference in FP32 with the tradeoff of high GPU memory requirements.
 
 > 📝 **Note**: For INT8 precision, we had to manually set a significant part of the network, particularly the section that processes the G-Buffers, to FP16 to maintain high quality. As a result, the improvement in performance is relatively small.
 
