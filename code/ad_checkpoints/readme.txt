@@ -1,0 +1,1 @@
+In this directory, drop the 'AutonomousDriving', 'Deeplabv3', and 'YOLOv5' directories that can be downloaded from https://drive.google.com/drive/folders/1ji2lymOjqbNDVS2VExZrSuJtFMaBZ9dI?usp=drive_link. The directories include pre-trained PyTorch models (.pth) for both the enhanced and original output of the CARLA simulator.

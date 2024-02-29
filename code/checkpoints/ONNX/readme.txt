@@ -1,0 +1,1 @@
+In this directory, drop the content of the ONNX directory that can be downloaded from https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link. This specific directory includes the generated ONNX models and the TensoRT engines.

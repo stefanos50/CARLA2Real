@@ -1,0 +1,8 @@
+setup.cfg
+setup.py
+epe/EPEExperiment.py
+epe/__init__.py
+local_epe.egg-info/PKG-INFO
+local_epe.egg-info/SOURCES.txt
+local_epe.egg-info/dependency_links.txt
+local_epe.egg-info/top_level.txt

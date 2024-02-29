@@ -1,0 +1,20 @@
+ego_vehicle_settings:
+  init_spawn_point: random #random or any point id or a transform [[10,10,10],[1,1,1]] ([location,rotation])
+other_actor:
+  actor_id: 
+  init_spawn_point:
+  static:
+  init_controls:
+  distance_threshold:
+  threshold_critiria:
+  out_controls:
+general:
+  traffic_lights: green
+  traffic_lights_time: 1000000000000
+  val_ticks:
+  
+
+
+  
+  
+  

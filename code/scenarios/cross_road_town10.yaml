@@ -1,0 +1,20 @@
+ego_vehicle_settings:
+  init_spawn_point: [[-41,56,2],[0,-90,0]] #random or any point id or a transform [[10,10,10],[1,1,1]] ([location,rotation])
+other_actor:
+  actor_id: vehicle.tesla.model3 #any vehicle class or person class from the documentation
+  init_spawn_point: [[-26,31,0.2],[0,180,0]] #[location,rotation]
+  static: False #If the other vehicle should move or not
+  init_controls: [0,0,0] #steer,throttle,brake values before the trigger (if zeros then the object will be static)
+  distance_threshold: 24 #the distance between the ego vehicle to trigger the action
+  threshold_critiria: less_equals #the threshold distance critiria to trigger the action
+  out_controls: [0,1,0] #new controls after triggering the event based of the distance threshold
+general:
+  traffic_lights: green #green or red
+  traffic_lights_time: 1000000000000 #time duration for the traffic light state
+  val_ticks: 100 #number of ticks in synchronous mode to run the scenario. If set to None, it will run infinitely.
+  
+
+
+  
+  
+  

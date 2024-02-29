@@ -1,0 +1,1 @@
+In this directory, drop the ".pth" Pytorch pre-trained models that can be downloaded from https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link.

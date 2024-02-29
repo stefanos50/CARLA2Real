@@ -1,0 +1,104 @@
+carla_server_settings: #carla connection settings.
+  ip: '127.0.0.1' #ip to connect 127.0.0.1 if run locally.
+  port: 2000 #port to connect default is 2000.
+  timeout: 10.0 #time to wait before timeout.
+
+carla_world_settings:
+  town: Town10HD #any installed carla town https://carla.readthedocs.io/en/latest/core_map/.
+  load_parked_vehicles: True #load or remove parked vehicles (should use _Opt map, Town10HD_Opt, etc.). This can be useful when generating a dataset with object detection annotations since parked vehicles do not provide annotations.
+  weather_preset: ClearNoon #Default or any of the predefined Carla weather presets https://carla.readthedocs.io/en/stable/carla_settings/.
+  perspective: 1 #perspective of the camera 0 (ego's vehicle hood is not visible), 1 (hood is visible), 2 (will use the specified camera coordinates).
+  driving_mode: auto #ad_model (testing a pre-trained model), auto (Carla autopilot), rl_train (training reinforcement learning), rl_eval (evaluating a trained RL model), manual (keyboard arrows or AWSD keys).  
+  camera_output: enhanced #enhanced or rgb, if enhanced then the autonomous driving models will utilize the result of the enhancing photorealism enhancement approach.
+  skip_frames: 3 #used in synchronous mode to skip a number of ticks. Can be useful to increase performance or generate a synthetic dataset.
+  sync_mode: True #run in synchronous or asynchronous mode.
+  fixed_delta_seconds: 0.05 #Set a variable time-step.
+  no_rendering_mode: False #render or not the UE4 output in the server window. Enable this parameter if you use weather presets that include rain with the Cityscapes pre-trained model.
+  spectator_camera_mode: follow #free or follow (if the spectator camera should follow the ego vehicle camera).
+  manual_controls: [0.8,0.5,1] #if driving_mode is set to manual define the controls [throttle,steer,brake]. Can be useful depending on the fps and the skip_frames variables.
+
+dataset_settings: #Generating a synthetic Dataset settings.
+  export_dataset: False #Generate or not a dataset (available only in synchronous mode).
+  dataset_path: A:/ #The path of a disk for the dataset to be saved.
+  images_format: png #png or jpg
+  capture_when_static: False #Capture frames or not when the vehicle is not moving.
+  speed_threshold: 0.1 #Capture frames or not if a vehicle is moving below a speed threshold.
+  export_depth: True #Export or not depth buffer frames.
+  export_semantic_gt: True #Export or not semantic segmentation ground truth labels.
+  export_status_json: True #Export or not information about the ego vehicle (steer, throttle, brake, etc.) and world (weather, etc.).
+  export_object_annotations: True #Export or not object detection annotations.
+  object_annotation_distance: 70 #Max distance to draw a bounding box.
+  object_dot_product_threshold: 0.5 #Dot product threshold. Refer to https://carla.readthedocs.io/en/latest/tuto_G_bounding_boxes/.
+  object_bbox_shape_threshold: 800 #Bounding box size threshold to filter small bounding boxes in the case of bikers.
+  object_bbox_min_extent: 0.5 #Bounding box extent constant to solve CARLA 0.9.14 bug for 2-wheel vehicles.
+  object_visualize_annotations: True #Create or not a cv2 window to visualize the annotations in real-time.
+  object_annotations_classes: ['person','vehicle','truck','bus','motorcycle','bicycle','rider','traffic_light','traffic_sign'] #List with the classes to export annotations (available classes are 'person','vehicle','truck','bus','motorcycle','bicycle','rider','traffic_light','traffic_sign').
+  object_class_numpixel_threshold: {"person": 100, "vehicle": 250, "truck": 350, "bus": 350, "traffic_light": 10, "traffic_signs": 10,"motorcycle": 100, "bicycle": 100,"rider":150} #per class threshold of white pixels in the semantic segmentation mask to consider an object visible.
+  object_class_numpixel_zero_threshold: {"person": 100, "vehicle": 250, "truck": 350, "bus": 350, "traffic_light": 0, "traffic_signs": 0,"motorcycle": 200, "bicycle": 200,"rider":100} #per class threshold of black pixels in the semantic segmentation mask to consider that an object is not hidden from an object of the same class.
+
+  use_semantic_lidar: True #use semantic lidar for occlusion checks
+  use_only_semantic_lidar: False #use only semantic lidar (without semantic masks) for occlusion checks (not recommended with high traffic)
+  semantic_lidar_transform: [[5.2,-0.3,1.4],[0,0,-90]] #semantic lidar position and rotation coordinates (x,y,z)
+  semantic_lidar_channels: 128 
+  semantic_lidar_range: 1000
+  semantic_lidar_upper_fov: 100 #upper and lower fov can also affect the accuracy, we recommend experimenting with the parameters via the visualization
+  semantic_lidar_lower_fov: -100
+  semantic_lidar_points_per_second: 156000
+  semantic_lidar_rotation_frequency: 30 #this parameter should be perfectly synchronized with the fixed_time_step and the fps to get decent results, refer to https://carla.readthedocs.io/en/latest/ref_sensors/.
+  semantic_lidar_horizontal_fov: 360
+
+other_sensors_settings: #Create or not Lidar,Radar,IMU and GNSS sensors. For their corresponding parameters below refer to https://carla.readthedocs.io/en/latest/ref_sensors/.
+  use_lidar: False
+  use_radar: False
+  use_imu: False
+  use_gnss: False
+
+radar_settings:
+  transform: [[0,0,2],[0,0,-90]]
+  horizontal_fov: 30
+  points_per_second: 1500
+  range: 100
+  vertical_fov: 30
+
+lidar_settings:
+  transform: [[0,0,2],[0,0,-90]]
+  channels: 32
+  range: 10.0
+  points_per_second: 56000
+  rotation_frequency: 10.0
+  upper_fov: 10.0
+  horizontal_fov: 360.0
+  atmosphere_attenuation_rate: 0.004
+  dropoff_general_rate: 0.45
+  dropoff_intensity_limit: 0.8
+  dropoff_zero_intensity: 0.4
+  
+ego_vehicle_settings:
+  vehicle_model: random  #random or any carla vehicle https://carla.readthedocs.io/en/latest/catalogue_vehicles/.
+  camera_location: [5.2,-0.3,1.4] #the camera location will be used only if perspective = 2.
+  camera_width: 960 #resolutions that are aligned to 256 for Windows system and CARLA 0.9.14.
+  camera_height: 540 #resolutions that are aligned to 256 for Windows system and CARLA 0.9.14.
+  camera_fov: 90 #field of view of the camera.
+  init_spawn_point: 7 #random or any point id or a transform [[10,10,10],[1,1,1]] ([location,rotation]).
+
+autonomous_driving:
+  rl_action_dim: 3 #action space size
+  rl_model_name: dqn #model name that is used to save and load checkpoints.
+  rl_model_load_episode: 3 #the desired episode of the saved models to be loaded for evaluation.
+  rl_num_episodes_save: 1 #save the model per 'rl_num_episodes_save' episodes.
+  rl_buffer_max_size: 10000 #max size of the replay memory buffer for previous experiences.
+  rl_use_exploration: True #enable or disable exploration-exploitation method.
+  ad_brake_threshold: 1.8 #threshold value for the braking to start having an effect. If threshold >= 1 then the vehicle will never brake.
+  scenario: default #The scenario that will be loaded from \code\scenarios without the .yaml extension.
+  stabilize_num_ticks: 20 #run a number of ticks to stabilize the ego vehicle from the air to the ground when spawning or teleported to another location.
+  
+general:
+  data_type: fp32 #The precision to inference the enhancement model (fp32 or fp16 or tf32 or int8). For TensorRT and Pytorch the recommended is FP16 while ONNX Runtime FP32.
+  pygame_output: enhanced #enhanced or rgb or ad_task (for running semantic segmentation or object detection tasks). This parameter defines which result the pygame window will render.
+  run_enhanced_model: True #Enable or Disable enhancing photorealism enhancement model (available only if pygame output is set to RGB).
+  compiler: pytorch #onnxruntime or tensorrt or pytorch.
+  tensorrt_common_path: K:\TensorRT-8.6.1.6\samples\python #the path where the common.py file is located inside TensorRT installation.
+  async_data_transfer: False #Transfer the data asynchronously to the GPU. This is available only in asynchronous mode and has high CPU requirements.
+  calibration_dataset: K:\code\config\data\val.txt #A small input dataset in txt format (images, buffers, and gt labels paths) to use for calibration when using TensorRT with INT8 data type.
+  visualize_buffers: True #Enable or Disable a CV2 window that visualizes G-Buffers. This is just to demonstrate the EPE approach. Disable it to improve the performance.
+  

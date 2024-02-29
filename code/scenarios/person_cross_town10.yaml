@@ -1,0 +1,20 @@
+ego_vehicle_settings:
+  init_spawn_point: [[-3,-64,2],[0,180,0]] #random or any point id or a transform [[10,10,10],[1,1,1]] ([location,rotation])
+other_actor:
+  actor_id: walker.pedestrian.0027
+  init_spawn_point: [[-31,-73,1],[0,270,0]]
+  static: False
+  init_controls: [0,[0,0,0]]
+  distance_threshold: 25
+  threshold_critiria: less_equals
+  out_controls: [2,[0,1,0]]
+general:
+  traffic_lights: green
+  traffic_lights_time: 1000000000000
+  val_ticks: 100
+  
+
+
+  
+  
+  
