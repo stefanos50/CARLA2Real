@@ -31,7 +31,7 @@ This section provides a short summary of all the available data and pre-trained 
      - [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
 2. CARLA Synthetic Dataset
    - Synthetic Dataset for training [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) on any target dataset, including 20.000 frames, G-Buffers, ground truth labels, and the coresponding robust [MSEG](https://github.com/mseg-dataset/mseg-api) predictions.
-     - [**Synthetic Dataset**](https://drive.google.com/file/d/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga/view?usp=sharing)
+     - [**Synthetic Dataset**](https://drive.google.com/drive/folders/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga?usp=drive_link)
 3. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
    - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
      - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
@@ -165,7 +165,7 @@ For a detailed understanding of how to train with your own dataset and generate 
 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
-> 📝 **Note**: We also provide a [synthetic dataset](https://drive.google.com/file/d/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga/view?usp=sharing) including 20.000 frames, G-buffers, ground truth labels, and robust label maps that can be employed for training with the same structure.
+> 📝 **Note**: We also provide a [synthetic dataset](https://drive.google.com/drive/folders/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga?usp=drive_link) including 20.000 frames, G-buffers, ground truth labels, and robust label maps that can be employed for training with the same structure.
 
 ![GBUFFERS](https://drive.google.com/thumbnail?id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV&sz=w1000)
 
@@ -269,7 +269,7 @@ In the case of building an ONNX file, it can take up to more than 100GB of syste
 > ⚠️ **Warning**: NVIDIA's TensorRT can result in issues when exporting ONNX files. We recommend selecting PyTorch or ONNX Runtime from the `compiler` parameter in that particular case.
 ### Data Augmentation
 
-In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. Similar to the real datasets, we provide a small [**sample dataset**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing) with translated images from CARLA to GTA V (Grand Theft Auto V). 
+In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. Similar to the real datasets, we provide a [**sample dataset**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing) with translated images from CARLA to GTA V (Grand Theft Auto V). 
 
 ![carla2gta](https://drive.google.com/thumbnail?id=1wCrzvFQcNsWVI44A12yQOnR8CEmgoJ90&sz=w1000)
 
