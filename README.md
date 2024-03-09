@@ -31,7 +31,7 @@ This section provides a short summary of all the available data and pre-trained 
      - [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
 2. CARLA Synthetic Dataset
    - Synthetic Dataset for training [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) on any target dataset, including 20.000 frames, G-Buffers, ground truth labels, and the coresponding robust [MSEG](https://github.com/mseg-dataset/mseg-api) predictions.
-     - [**Synthetic Dataset**](https://drive.google.com/drive/folders/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga?usp=drive_link)
+     - [**Synthetic Dataset [Download]**](https://drive.google.com/drive/folders/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga?usp=drive_link)
 3. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
    - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
      - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
