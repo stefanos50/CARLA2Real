@@ -27,15 +27,15 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 This section provides a short summary of all the available data and pre-trained models that are provided and are available for download through Google Drive. The following sections will further describe the required procedure for employing these data.
 
 1. Enhanced CARLA Datasets
-   - CARLA frames before and after applying the [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) approach along with various annotations, including semantic segmentation and object detection.
+   - CARLA frames before and after applying the [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) approach along with semantic segmentation annotations.
      - [**CARLA Enhanced Synthetic Dataset (Cityscapes, Mapillary Vistas, KITTI, and GTA - 80.000 Frames)**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing)
-     - [**CARLA2Cityscapes**](https://drive.google.com/file/d/1Fj8WsWWzPVoNBez8Glgw65GGXAg9eIzM/view?usp=drive_link)
-     - [**CARLA2KITTI**](https://drive.google.com/file/d/18KQW_KeA9HhyF2A6jwCRnhVvbW3CA3qf/view?usp=drive_link)
-     - [**CARLA2GTA**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link)
-2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
+2. CARLA Synthetic Dataset
+   - Synthetic Dataset for training [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) on any target dataset including 20.000 Frames, G-Buffers, Ground Truth Labels, and the coresponding robust [MSEG](https://github.com/mseg-dataset/mseg-api) predictions.
+     - [**Synthetic Dataset**](https://drive.google.com/file/d/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga/view?usp=sharing)
+3. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
    - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
      - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
-3. Autonomous Driving
+4. Autonomous Driving
    - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
      - [**Autonomous Driving Pre-trained Models**](https://drive.google.com/drive/folders/1ji2lymOjqbNDVS2VExZrSuJtFMaBZ9dI?usp=drive_link)  
 
@@ -165,6 +165,8 @@ For a detailed understanding of how to train with your own dataset and generate 
 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
+> 📝 **Note**: We also provide a [synthetic dataset](https://drive.google.com/file/d/1vyo71eW7F0r0_EU60bf99QCrak0IU5ga/view?usp=sharing) including 20.000 frames, G-buffers, ground truth labels, and robust label maps that can be employed for training with the same structure.
+
 ![GBUFFERS](https://drive.google.com/thumbnail?id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV&sz=w1000)
 
 After setting up the dataset, the txt files with the data paths and the patch-matching-generated files modify the `\code\config\train_pfd2cs.yaml` accordingly and run the following command to start the training procedure:
@@ -267,7 +269,7 @@ In the case of building an ONNX file, it can take up to more than 100GB of syste
 > ⚠️ **Warning**: NVIDIA's TensorRT can result in issues when exporting ONNX files. We recommend selecting PyTorch or ONNX Runtime from the `compiler` parameter in that particular case.
 ### Data Augmentation
 
-In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. Similar to the real datasets, we provide a small [**sample dataset**](https://drive.google.com/file/d/1zT7iZFHeTlDYSXEHIM6EbMtHDCsF3UcX/view?usp=drive_link) with translated images from CARLA to GTA V (Grand Theft Auto V). 
+In addition to enhancing CARLA with a real-life dataset, we experimented with translating the data to another game, such as GTA, using the [**Playing for Data dataset**](https://download.visinf.tu-darmstadt.de/data/from_games/). This experiment demonstrated that translating the world to another game or simulator could be a rapid method for generating new data to train CARLA models, leading to higher accuracy and better generalization. Similar to the real datasets, we provide a small [**sample dataset**](https://drive.google.com/file/d/1iNuOP_5xCSBdM-jgs1iXflaq0AUTykbR/view?usp=sharing) with translated images from CARLA to GTA V (Grand Theft Auto V). 
 
 ![carla2gta](https://drive.google.com/thumbnail?id=1wCrzvFQcNsWVI44A12yQOnR8CEmgoJ90&sz=w1000)
 
