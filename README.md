@@ -50,6 +50,13 @@ If you used the CARLA2Real tool or any dataset from this repository in a scienti
       primaryClass={cs.CV},
       url={https://arxiv.org/abs/2410.18238}, 
 }
+
+@Article{Richter_2021,
+                    title = {Enhancing Photorealism Enhancement},
+                    author = {Stephan R. Richter and Hassan Abu AlHaija and Vladlen Koltun},
+                    journal= {arXiv:2105.04619},
+                    year = {2021},
+                }
 ```
 
 # Installitation/Requirements
