@@ -78,7 +78,7 @@ This project is based on the `listen_to_gbuffer()` API method that extracts and 
 First, download the files of this repository as a `Zip archive` and extract the `code` directory to a disk. Alternatively, you can clone the repository and follow the same steps by running the command:
 
 ```javascript
-git clone http:/...........
+git clone https://github.com/stefanos50/CARLA2Real
 ```
 
 To run the code, you need to download and set up [Anaconda](https://www.anaconda.com/download) on your computer. After that, create and set up a Conda environment. For detailed instructions, you can refer to the `Setup` section in the [Enhancing Photorealism Enhancement repository](https://github.com/isl-org/PhotorealismEnhancement/tree/main/code).
