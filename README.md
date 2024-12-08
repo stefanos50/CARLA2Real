@@ -41,14 +41,11 @@ This section provides a short summary of all the available data and pre-trained 
 If you used the CARLA2Real tool or any dataset from this repository in a scientific publication, we would appreciate using the following citations:
 
 ```
-@misc{pasios2024carla2realtoolreducingsim2real,
-      title={CARLA2Real: a tool for reducing the sim2real gap in CARLA simulator}, 
-      author={Stefanos Pasios and Nikos Nikolaidis},
-      year={2024},
-      eprint={2410.18238},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2410.18238}, 
+@article{pasios2024carla2real,
+  title={CARLA2Real: a tool for reducing the sim2real gap in CARLA simulator},
+  author={Pasios, Stefanos and Nikolaidis, Nikos},
+  journal={arXiv preprint arXiv:2410.18238},
+  year={2024}
 }
 
 @Article{Richter_2021,
