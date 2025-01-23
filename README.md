@@ -65,7 +65,7 @@ This limitation affects tools relying on GBuffers, including ours, as attempting
 
 To address this, we have updated this repository with an easy-to-use solution that focuses on:
 
-- **Demonstrating the trained models** effectively in the more realistic **Town10 environment**.
+- **Demonstrating the capabilities of the trained models** in the more realistic **Unreal Engine 5 environments**.
 - **Generating datasets** using the enhanced graphical capabilities of CARLA 0.10.0 along with our trained photorealism enhancement models.
 
 ## Documentation
