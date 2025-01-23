@@ -72,9 +72,6 @@ To address this, we have updated this repository with an easy-to-use solution th
 
 For detailed instructions on configuring and using the updated code, please refer to the dedicated documentation available in the `carla_unreal_engine_5` directory.
 
-
-CARLA with the new version 0.10.0 is moving towards Unreal Engine 5 with more advanced computer graphics technologies such as lumen and nanite. As already mentioned in the [official anouncement page](https://carla.org/2024/12/19/release-0.10.0/) currently the GBuffers API is not supported. Thus when trying to connect with our tool CARLA simulator will crash while trying to add the GBuffers listeners. Currently the code is updated with an easy to use and configure solution for demonstration of our trained model and the generation of datasets within the more realistic town10 environment. If you are intrested a dedicated documentation can be found inside the carla_ue5_epe directory.
-
 # Installitation/Requirements
 
 ### Hardware Requirements
