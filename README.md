@@ -30,7 +30,7 @@ This section provides a short summary of all the available data and pre-trained 
    - Synthetic Dataset for training [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) along with enhanced frames targeting the characteristics of Cityscapes, KITTI, and Mapillary Vistas.
      - [**Synthetic Dataset [Download]**](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla)
 2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
-   - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/).
+   - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas).
      - [**Cityscapes Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
 3. Autonomous Driving
    - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
@@ -55,6 +55,25 @@ If you used the CARLA2Real tool or any dataset from this repository in a scienti
                     year = {2021},
                 }
 ```
+# CARLA 0.10.0 Update
+
+With the release of **CARLA 0.10.0**, the simulator has made significant strides by migrating to **Unreal Engine 5**, introducing advanced computer graphics technologies such as **Lumen** and **Nanite**. However, as noted in the [official announcement](https://carla.org/2024/12/19/release-0.10.0/), the **GBuffers API** is currently not supported in this version.
+
+This limitation affects tools relying on GBuffers, including ours, as attempting to add GBuffers listeners will cause the simulator to crash.
+
+## Updates to Our Tool
+
+To address this, we have updated our codebase with an easy-to-use solution that focuses on:
+
+- **Demonstrating the trained models** effectively in the more realistic **Town10 environment**.
+- **Generating datasets** using the enhanced graphical capabilities of CARLA 0.10.0 along with our trained photorealism enhancement models.
+
+## Documentation
+
+For detailed instructions on configuring and using the updated code, please refer to the dedicated documentation available in the `carla_unreal_engine_5` directory.
+
+
+CARLA with the new version 0.10.0 is moving towards Unreal Engine 5 with more advanced computer graphics technologies such as lumen and nanite. As already mentioned in the [official anouncement page](https://carla.org/2024/12/19/release-0.10.0/) currently the GBuffers API is not supported. Thus when trying to connect with our tool CARLA simulator will crash while trying to add the GBuffers listeners. Currently the code is updated with an easy to use and configure solution for demonstration of our trained model and the generation of datasets within the more realistic town10 environment. If you are intrested a dedicated documentation can be found inside the carla_ue5_epe directory.
 
 # Installitation/Requirements
 
@@ -106,7 +125,7 @@ pip install onnxruntime-gpu
 
 ### Installing Pre-Trained models
 
-The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (if you trained your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
+The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (if you trained your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
 
 ### Installing TensorRT
 
