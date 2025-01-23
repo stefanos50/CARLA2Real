@@ -65,7 +65,7 @@ This limitation affects tools relying on GBuffers, including ours, as attempting
 
 To address this, we have updated this repository with an easy-to-use solution that focuses on:
 
-- **Demonstrating the capabilities of the trained models** in the more realistic **Unreal Engine 5 environments**.
+- **Demonstrating the capabilities of the trained models** in the more realistic **Unreal Engine 5 environments** ([sample UE5 results](https://drive.google.com/drive/folders/1N1DVn3UaiYn38fYeJa0NY9AIsHdlAldw?usp=sharing)).
 - **Generating datasets** using the enhanced graphical capabilities of CARLA 0.10.0 along with our trained photorealism enhancement models.
 
 ## Documentation
