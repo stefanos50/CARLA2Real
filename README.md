@@ -63,7 +63,7 @@ This limitation affects tools relying on GBuffers, including ours, as attempting
 
 ## Updates to Our Tool
 
-To address this, we have updated our codebase with an easy-to-use solution that focuses on:
+To address this, we have updated this repository with an easy-to-use solution that focuses on:
 
 - **Demonstrating the trained models** effectively in the more realistic **Town10 environment**.
 - **Generating datasets** using the enhanced graphical capabilities of CARLA 0.10.0 along with our trained photorealism enhancement models.
