@@ -20,7 +20,7 @@ Run the simulator within Unreal Engine 5 as a standalone game. Then, press the `
 ```javascript
 r.BufferVisualizationDumpFrames 1
 ```
-This command enables high-resolution screenshots and exposes the G-Buffers that contributed to rendering the current frame, allowing them to be saved.
+This command enables high-resolution screenshots to expose and save the G-Buffers that contributed to rendering of the frame.
 
 Execute the following command within your anaconda environment to start the data generation procedure:
 
