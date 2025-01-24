@@ -1,8 +1,8 @@
 # CARLA2Real: Unreal Engine 5 Update
 
-![carla2kitti_ue5](https://drive.google.com/thumbnail?id=1yAwWVqieLFNRyNXHvP0M7U3i7z8el3at&sz=w1000)
-
 ![carla2kitti_ue5](https://github.com/user-attachments/assets/05b02ff9-f770-44fa-b188-4a281d182301)
+
+![Screenshot 2025-01-24 015002](https://github.com/user-attachments/assets/7acd69c6-6f53-472d-abcf-00c215083926)
 
 
 While our Unreal Engine 5 approach is easy to use and doesn’t require modifying the CARLA source code or project settings, you **must** build CARLA from source and run it through the Unreal Engine editor. The packaged version of CARLA locks the Unreal console, which is needed for this setup.
