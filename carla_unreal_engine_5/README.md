@@ -2,7 +2,7 @@
 
 ![carla2kitti_ue5](https://github.com/user-attachments/assets/05b02ff9-f770-44fa-b188-4a281d182301)
 
-![carla2real](https://github.com/user-attachments/assets/d7fa6d5a-e104-437f-8b8d-48a7bab987fa)
+![Screenshot 2025-01-24 015002](https://github.com/user-attachments/assets/9c2a3e76-0cf5-4606-9705-bbb564256b3e)
 
 
 
