@@ -20,7 +20,7 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * A simplified version of the scenario runner for creating specific scenarios.
 * Support for implementing and evaluating autonomous driving algorithms or tasks (such as semantic segmentation, object detection, etc.) through simplified subscripts for code simplicity and easier integration.
 * Support for different compilers (Pytorch, ONNX Runtime, and TensorRT) based on ONNX structure and various data types (FP32, FP16, TF16, and INT8).
-* Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes.
+* Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes, KITTI, and Mapillary Vistas.
 * Support for synchronous and asynchronous modes.
 
 ### Data & Pre-trained Models
