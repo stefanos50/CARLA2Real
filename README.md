@@ -176,7 +176,7 @@ For a detailed understanding of how to train with your own dataset and generate 
 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
-> 📝 **Note**: We also provide a [synthetic dataset](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla) including 20.000 frames, G-buffers, ground truth labels, and robust label maps that can be employed for training with the same structure.
+> 📝 **Note**: We also provide a [synthetic dataset](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla) including 20.000 frames, G-buffers, and ground truth label that can be employed for training with the same structure. The dataset is already provided in a EPE compatible format. The only required step is the extraction of the [**MSEG**](https://github.com/mseg-dataset/mseg-semantic) results for both the synthetic and real-world images.
 
 ![GBUFFERS](https://drive.google.com/thumbnail?id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV&sz=w1000)
 
