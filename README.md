@@ -29,6 +29,7 @@ This section provides a short summary of all the available data and pre-trained 
 1. Synthetic Datasets
    - Synthetic Dataset for training [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) along with enhanced frames targeting the characteristics of Cityscapes, KITTI, and Mapillary Vistas.
      - [**Synthetic Dataset [Download]**](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla)
+     - [**Generated Robust Label Maps [Download]**](https://drive.google.com/file/d/1q9Ja6b1mOn_LioDGU-NCYIOKKgDa8wl2/view)
 2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
    - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas).
      - [**Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
@@ -176,7 +177,7 @@ For a detailed understanding of how to train with your own dataset and generate 
 
 > 💡 **Hint**: Before running any of the scripts inside `\code\epe\dataset_generation`, use the `--help` argument to check the available parameters and obtain information about how to use them.
 
-> 📝 **Note**: We also provide a [synthetic dataset](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla) including 20.000 frames, G-buffers, and ground truth labels that can be employed for training. The dataset is already provided in a EPE compatible format. The only required step is the extraction of the [**MSEG**](https://github.com/mseg-dataset/mseg-semantic) results for both the synthetic and real-world images.
+> 📝 **Note**: We also provide a [synthetic dataset](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla) including 20.000 frames, G-buffers, and ground truth labels that can be employed for training. The dataset is already provided in a EPE compatible format. The only required step is the extraction of the [**MSEG**](https://github.com/mseg-dataset/mseg-semantic) results for real-world images. The MSEG results for the synthetic dataset are already provided [here](https://drive.google.com/file/d/1q9Ja6b1mOn_LioDGU-NCYIOKKgDa8wl2/view).
 
 ![GBUFFERS](https://drive.google.com/thumbnail?id=1KOgYtS9h2_bao1nedSRH-oHdF5y66UpV&sz=w1000)
 
