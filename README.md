@@ -20,7 +20,7 @@ The primary aim of this project is to enhance the photorealism of the CARLA simu
 * A simplified version of the scenario runner for creating specific scenarios.
 * Support for implementing and evaluating autonomous driving algorithms or tasks (such as semantic segmentation, object detection, etc.) through simplified subscripts for code simplicity and easier integration.
 * Support for different compilers (Pytorch, ONNX Runtime, and TensorRT) based on ONNX structure and various data types (FP32, FP16, TF16, and INT8).
-* Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes, KITTI, and Mapillary Vistas.
+* Pre-trained models (PyTorch, ONNX, and TensorRT) targeting the characteristics of Cityscapes, KITTI, Mapillary Vistas, and nuScenes.
 * Support for synchronous and asynchronous modes.
 
 ### Data & Pre-trained Models
@@ -31,7 +31,8 @@ This section provides a short summary of all the available data and pre-trained 
      - [**Synthetic Dataset [Download]**](https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla)
      - [**Generated Robust Label Maps [Download]**](https://drive.google.com/file/d/1q9Ja6b1mOn_LioDGU-NCYIOKKgDa8wl2/view)
 2. [Enhancing Photorealism Enhancement](https://github.com/isl-org/PhotorealismEnhancement) Pre-trained Models
-   - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas).
+   - Pre-trained (PyTorch, ONNX, and TensorRT) models targeting the characteristics of [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), [Mapillary Vistas](https://www.mapillary.com/dataset/vistas), and [nuScenes
+](https://www.nuscenes.org/).
      - [**Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
 3. Autonomous Driving
    - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
