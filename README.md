@@ -43,12 +43,16 @@ This section provides a short summary of all the available data and pre-trained 
 If you used the CARLA2Real tool or any dataset from this repository in a scientific publication, we would appreciate using the following citations:
 
 ```
-@article{pasios2024carla2real,
-  title={CARLA2Real: a tool for reducing the sim2real gap in CARLA simulator},
+@ARTICLE{11122908,
   author={Pasios, Stefanos and Nikolaidis, Nikos},
-  journal={arXiv preprint arXiv:2410.18238},
-  year={2024}
-}
+  journal={IEEE Transactions on Intelligent Transportation Systems}, 
+  title={CARLA2Real: A Tool for Reducing the Sim2real Appearance Gap in CARLA Simulator}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-15},
+  keywords={Translation;Synthetic data;Visualization;Training;Feature extraction;Engines;Autonomous vehicles;Semantic segmentation;Photorealism;Games;Sim2real gap;CARLA simulator;computer vision;image processing;autonomous driving},
+  doi={10.1109/TITS.2025.3597010}}
 
 @Article{Richter_2021,
                     title = {Enhancing Photorealism Enhancement},
