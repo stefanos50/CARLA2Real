@@ -16,7 +16,7 @@ This project originated as part of a Master's Thesis within the "Digital Media -
     1. You want to easily enhance the photorealism of a pre-existing CARLA dataset with only the RGB images.
     2. You want fast inference of 30 fps or above.
     3. Have a low spec system.
-* **11/09/2025**: Added pretrained model for [nuScenes](https://www.nuscenes.org/).
+* **11/06/2025**: Added pretrained model for [nuScenes](https://www.nuscenes.org/).
 * **23/01/2025**: Added code for testing the models on the latest Unreal Engine 5 version of the CARLA simulator (including [sample UE5 results](https://drive.google.com/drive/folders/1N1DVn3UaiYn38fYeJa0NY9AIsHdlAldw?usp=sharing)).
 
 ### Objective
