@@ -8,6 +8,17 @@ This project originated as part of a Master's Thesis within the "Digital Media -
   <img src="https://drive.google.com/thumbnail?id=1us-sVe9OmYunOtHQrqWjD8uJoOyYDY57&sz=w1000" alt="Image" width="400px" height="auto">
 </div>
 
+### Updates
+
+
+* **ToDo**: Integrate REGEN as an option.
+* **26/08/2025**: Based on our latest research work, we now propose the REGEN framework, which increases EPE inference time by more than 32 times while removing the requirement for additional inputs (i.e., G-Buffers and semantic segmentation). We suggest visiting the [REGEN repository](https://github.com/stefanos50/REGEN) if:
+    1. You want to easily enhance the photorealism of a pre-existing CARLA dataset with only the RGB images.
+    2. You want fast inference of 30 fps or above.
+    3. Have a low spec system.
+* **11/09/2025**: Added pretrained model for [nuScenes](https://www.nuscenes.org/).
+* **23/01/2025**: Added code for testing the models on the latest Unreal Engine 5 version of the CARLA simulator (including [sample UE5 results](https://drive.google.com/drive/folders/1N1DVn3UaiYn38fYeJa0NY9AIsHdlAldw?usp=sharing)).
+
 ### Objective
 The primary aim of this project is to enhance the photorealism of the CARLA simulator output in real-time. Leveraging the [**Enhancing Photorealism Enhancement**](https://github.com/isl-org/PhotorealismEnhancement) project developed by Intel Labs, our goal is to reduce the SIM2REAL appearance gap. This gap is persistent when training Deep Learning (DL) algorithms in the simulator and deploying them in real-world scenarios.
 
@@ -61,18 +72,6 @@ If you used the CARLA2Real tool or any dataset from this repository in a scienti
                     year = {2021},
                 }
 ```
-# CARLA 0.10.0 Update
-
-With the release of **CARLA 0.10.0**, the simulator has made significant strides by migrating to **Unreal Engine 5**, introducing advanced computer graphics technologies such as **Lumen** and **Nanite**. However, as noted in the [official announcement](https://carla.org/2024/12/19/release-0.10.0/), the **GBuffers API** is currently not supported in this version.
-
-This limitation affects tools relying on GBuffers, including ours, as attempting to add GBuffers listeners will cause the simulator to crash.
-
-## Updates to Our Tool
-
-To address this, we have updated this repository with an easy-to-use solution that focuses on:
-
-- **Demonstrating the capabilities of the trained models** in the more realistic **Unreal Engine 5 environments** ([sample UE5 results](https://drive.google.com/drive/folders/1N1DVn3UaiYn38fYeJa0NY9AIsHdlAldw?usp=sharing)).
-- **Generating datasets** using the enhanced graphical capabilities of CARLA 0.10.0 along with our trained photorealism enhancement models.
 
 ## Documentation
 
