@@ -6,15 +6,13 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
   </a>
   <a href="https://www.youtube.com/watch?v=4xG9cBrFiH4" target="_blank">
-    <img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
+    <img alt="Static Badge" src="https://img.shields.io/badge/DEMO-red?style=for-the-badge&logo=YouTube&logoSize=auto">
   </a>
   <a href="https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX" target="_blank">
-<img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
-
+<img alt="Static Badge" src="https://img.shields.io/badge/MODELS-orange?style=for-the-badge&logo=googledrive&logoSize=auto">
   </a>
   <a href="https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla" target="_blank">
-<img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
-
+<img alt="Static Badge" src="https://img.shields.io/badge/DATASET-cyan?style=for-the-badge&logo=kaggle&logoSize=auto">
   </a>
 </div>
 
