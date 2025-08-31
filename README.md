@@ -1,6 +1,23 @@
 
 # CARLA2Real: a tool for reducing the sim2real appearance gap in CARLA simulator
 
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <a href="https://ieeexplore.ieee.org/document/11122908/" target="_blank">
+    <img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
+  </a>
+  <a href="https://www.youtube.com/watch?v=4xG9cBrFiH4" target="_blank">
+    <img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
+  </a>
+  <a href="https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX" target="_blank">
+<img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
+
+  </a>
+  <a href="https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla" target="_blank">
+<img alt="Static Badge" src="https://img.shields.io/badge/PAPER-blue?style=for-the-badge&logo=IEEE&logoSize=auto">
+
+  </a>
+</div>
+
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
 <div align="center">
