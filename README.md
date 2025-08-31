@@ -3,16 +3,16 @@
 
 <div style="display: flex; justify-content: center; gap: 10px;">
   <a href="https://ieeexplore.ieee.org/document/11122908/" target="_blank">
-    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=PAPER" style="max-width: 100%;" />
+    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=PAPER" style="max-width: 20%;" />
   </a>
   <a href="https://www.youtube.com/watch?v=4xG9cBrFiH4" target="_blank">
-    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=DEMO" style="max-width: 100%;" />
+    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=DEMO" style="max-width: 20%;" />
   </a>
   <a href="https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX" target="_blank">
-    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=MODELS" style="max-width: 100%;" />
+    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=MODELS" style="max-width: 20%;" />
   </a>
   <a href="https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla" target="_blank">
-    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=DATASETS" style="max-width: 100%;" />
+    <img src="https://capsule-render.vercel.app/api?type=waving&height=150&width=300&color=random&text=DATASETS" style="max-width: 20%;" />
   </a>
 </div>
 
