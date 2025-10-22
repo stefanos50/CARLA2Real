@@ -147,7 +147,7 @@ pip install onnxruntime-gpu
 
 The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](https://www.cityscapes-dataset.com/), [KITTI](https://www.cvlibs.net/datasets/kitti/), and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas) can be found [**here**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=sharing). Download and extract the content to `\code\checkpoints\`. To change the selected model (if you trained your own model), modify the `weight_dir` and `name_load` parameters inside `\code\config\infer_pfd2cs.yaml` for real-time inference or `\code\config\test_pfd2cs.yaml` for off-line translation (testing) on CARLA frames.
 
-### Installing TensorRT
+### Installing TensorRT (Optional)
 
 Nvidia's TensorRT is utilized to optimize and improve inference performance for handling a model of this size. While installing PyTorch and ONNX Runtime is straightforward using `pip install`, TensorRT requires additional steps for installation. Begin by checking if your hardware supports TensorRT and identifying any other dependencies required based on your hardware configuration. For instance, RTX 4090 works only with CUDA 11.8 (or newer) for TensorRT. Refer to the [**TensorRT support matrix**](https://docs.nvidia.com/deeplearning/tensorrt/support-matrix/index.html) for compatibility information.
 
