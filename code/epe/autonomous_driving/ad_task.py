@@ -6,9 +6,10 @@ from torchvision import transforms
 import cv2
 from PIL import Image
 from epe.autonomous_driving.helper_methods import Helper
+from ultralytics import YOLO
 import yaml
 
-ad_task_name = 'semantic_segmentation' #switch between semantic segmentation and object detection
+ad_task_name = 'object_detection' #switch between semantic segmentation and object detection
 #with open("../config/carla_config.yaml", 'r') as file:
     #carla_config = yaml.safe_load(file)
 
@@ -22,7 +23,7 @@ def initialize_model(num_classes, use_pretrained=True):
         model_deeplabv3.classifier = torchvision.models.segmentation.deeplabv3.DeepLabHead(2048, num_classes)
         return model_deeplabv3
     elif ad_task_name == "object_detection":
-        model = torch.hub.load('C:\\Users\\stefa\\PycharmProjects\\Theses\\AutonomousDriving\\yolov5\\', 'custom', path='..\\ad_checkpoints\\YOLOv5\\enhanced_best_town10.pt\\', source='local') #change the path based on your yolov5 installation path
+        model = YOLO('..\\checkpoints\\YOLO\\best.pt')
         return model
 
 #Colors for each class of Object Detection bounding boxes
@@ -179,40 +180,27 @@ class ADTask:
 
             return semantic.astype(np.uint8)
         elif ad_task_name == "object_detection":
-            #helper = Helper()
-            #helper.gt_labels = ground_truth
-            #gt_boxes,gt_names = helper.get_object_detection_annotations(camera,world,vehicle,carla_config)
             frame = np.ascontiguousarray(frame, dtype=np.uint8)
 
             pil_frame = Image.fromarray(frame.astype(np.uint8))
-            results = self.model(pil_frame)
+            results = self.model.predict(pil_frame, save=False, conf=0.5)[0]  # ✅ take first result
 
-            results = results.xyxy[0]
-            cls_names = ['person','rider','car','bicycle','motorcycle','bus','truck']
+            cls_names = ['person', 'rider', 'vehicle', 'truck', 'bus', 'motorcycle', 'bicycle']
 
-            for pred in results:
-                x1, y1, x2, y2, conf, class_idx = pred[:6]
-                x1 = int(x1.item())
-                y1 = int(y1.item())
-                x2 = int(x2.item())
-                y2 = int(y2.item())
-                conf = conf.item()
-                class_idx = class_idx.item()
-                class_name = cls_names[int(class_idx)]
+            for box in results.boxes:
+                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
+                conf = float(box.conf.cpu().numpy())
+                class_idx = int(box.cls.cpu().numpy())
+                class_name = cls_names[class_idx]
 
-                color = colors[int(class_idx)]
+                color = colors[int(class_idx) % len(colors)]
                 thickness = 2
 
                 cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
-                cv2.putText(frame, f"{class_name}: {conf:.2f}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                cv2.putText(frame, f"{class_name}: {conf:.2f}", (x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-            """for gt_id in range(len(gt_boxes)):
-                xmin = gt_boxes[gt_id][0]
-                ymin = gt_boxes[gt_id][1]
-                xmax = gt_boxes[gt_id][2]
-                ymax = gt_boxes[gt_id][3]
-                cv2.rectangle(frame, (xmax, ymax), (xmin, ymin), (255,255,255), 1)
-                cv2.putText(frame, f"{gt_names[gt_id]}", (xmin, ymin + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255,255,255), 1)"""
+            return np.array(frame)
 
             return np.array(frame)
 

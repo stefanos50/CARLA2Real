@@ -1,0 +1,1548 @@
+2025-11-01 14:48:08,322 VGG16:to: 0
+2025-11-01 14:48:08,994 Found 0 samples.
+2025-11-01 14:48:09,281 GAN(
+  (discriminator): PerceptualProjectionDiscEnsemble(
+    (discs): ModuleList(
+      (0-1): 2 x ProjectionDiscriminator(
+        (model): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): GroupNorm(8, 64, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+          (4): ReplicationPad2d((1, 1, 1, 1))
+          (5): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (6): GroupNorm(8, 128, eps=1e-05, affine=True)
+          (7): LeakyReLU(negative_slope=0.2, inplace=True)
+          (8): ReplicationPad2d((1, 1, 1, 1))
+          (9): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (10): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (11): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (out): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+          (2): Conv2d(256, 1, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (embedding): Embedding(194, 256)
+      )
+      (2-3): 2 x ProjectionDiscriminator(
+        (model): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): GroupNorm(8, 128, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+          (4): ReplicationPad2d((1, 1, 1, 1))
+          (5): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (6): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (7): LeakyReLU(negative_slope=0.2, inplace=True)
+          (8): ReplicationPad2d((1, 1, 1, 1))
+          (9): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (10): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (11): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (out): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+          (2): Conv2d(256, 1, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (embedding): Embedding(194, 256)
+      )
+      (4-6): 3 x ProjectionDiscriminator(
+        (model): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+          (4): ReplicationPad2d((1, 1, 1, 1))
+          (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (6): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (7): LeakyReLU(negative_slope=0.2, inplace=True)
+          (8): ReplicationPad2d((1, 1, 1, 1))
+          (9): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (10): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (11): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (out): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+          (2): Conv2d(256, 1, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (embedding): Embedding(194, 256)
+      )
+      (7-9): 3 x ProjectionDiscriminator(
+        (model): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(512, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+          (4): ReplicationPad2d((1, 1, 1, 1))
+          (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (6): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (7): LeakyReLU(negative_slope=0.2, inplace=True)
+          (8): ReplicationPad2d((1, 1, 1, 1))
+          (9): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (10): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (11): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (out): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+          (2): Conv2d(256, 1, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (embedding): Embedding(194, 256)
+      )
+    )
+  )
+  (generator): ResidualGenerator(
+    (network): HighResolutionNet(
+      (stem): Sequential(
+        (0): ReplicationPad2d((1, 1, 1, 1))
+        (1): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+        (2): GroupNorm(8, 16, eps=1e-05, affine=True)
+        (3): ReLU(inplace=True)
+        (4): ReplicationPad2d((1, 1, 1, 1))
+        (5): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+        (6): GroupNorm(8, 16, eps=1e-05, affine=True)
+        (7): ReLU(inplace=True)
+      )
+      (gbuffer_encoder): GBufferEncoder(
+        (class_encoders): ModuleList(
+          (0): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (1): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (2): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(18, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(18, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (3): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (4): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(18, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(18, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (5-11): 7 x Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(15, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+        )
+        (joint_encoder_layers): ModuleList(
+          (0): Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+          (1-2): 2 x Sequential(
+            (0): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (down): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2))
+                (2): ReLU(inplace=True)
+              )
+              (relu): ReLU(inplace=True)
+            )
+            (1): ResBlock(
+              (conv): Sequential(
+                (0): ReplicationPad2d((1, 1, 1, 1))
+                (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                (2): ReLU(inplace=True)
+                (3): ReplicationPad2d((1, 1, 1, 1))
+                (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+              )
+              (relu): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+      (layer1): Sequential(
+        (0): BasicBlock(
+          (conv1): Sequential(
+            (0): ReplicationPad2d((1, 1, 1, 1))
+            (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          )
+          (bn1): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (relu): ReLU()
+          (conv2): Sequential(
+            (0): ReLU(inplace=True)
+            (1): Sequential(
+              (0): ReplicationPad2d((1, 1, 1, 1))
+              (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+            )
+          )
+          (bn2): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Sequential(
+            (0): ReplicationPad2d((1, 1, 1, 1))
+            (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          )
+          (bn1): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (relu): ReLU()
+          (conv2): Sequential(
+            (0): ReLU(inplace=True)
+            (1): Sequential(
+              (0): ReplicationPad2d((1, 1, 1, 1))
+              (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+            )
+          )
+          (bn2): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (2): BasicBlock(
+          (conv1): Sequential(
+            (0): ReplicationPad2d((1, 1, 1, 1))
+            (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          )
+          (bn1): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (relu): ReLU()
+          (conv2): Sequential(
+            (0): ReLU(inplace=True)
+            (1): Sequential(
+              (0): ReplicationPad2d((1, 1, 1, 1))
+              (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+            )
+          )
+          (bn2): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (3): BasicBlock(
+          (conv1): Sequential(
+            (0): ReplicationPad2d((1, 1, 1, 1))
+            (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          )
+          (bn1): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (relu): ReLU()
+          (conv2): Sequential(
+            (0): ReLU(inplace=True)
+            (1): Sequential(
+              (0): ReplicationPad2d((1, 1, 1, 1))
+              (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+            )
+          )
+          (bn2): GBufferNorm(
+            (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+            (_conv): Sequential(
+              (0): ResBlock(
+                (conv): Sequential(
+                  (0): ReplicationPad2d((1, 1, 1, 1))
+                  (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                  (2): ReLU(inplace=True)
+                )
+                (relu): ReLU(inplace=True)
+              )
+            )
+            (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+      )
+      (transitions): ModuleList(
+        (0): ModuleList(
+          (0): None
+          (1): Sequential(
+            (0): Sequential(
+              (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+              (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+              (2): ReLU()
+            )
+          )
+        )
+        (1): ModuleList(
+          (0-1): 2 x None
+          (2): Sequential(
+            (0): Sequential(
+              (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+              (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+              (2): ReLU()
+            )
+          )
+        )
+      )
+      (stages): ModuleList(
+        (0): Sequential(
+          (0): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (1): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (2): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (3): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (1): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (2): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (3): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): GroupNorm(8, 16, eps=1e-05, affine=True)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+                    (2): GroupNorm(8, 32, eps=1e-05, affine=True)
+                  )
+                )
+                (1): None
+              )
+            )
+            (relu): ReLU()
+          )
+        )
+        (1): Sequential(
+          (0): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (1): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (2): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (3): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 16, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (1): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (2): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (3): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 32, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (1): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (2): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+                (3): BasicBlock(
+                  (conv1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                  )
+                  (bn1): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                  (relu): ReLU()
+                  (conv2): Sequential(
+                    (0): ReLU(inplace=True)
+                    (1): Sequential(
+                      (0): ReplicationPad2d((1, 1, 1, 1))
+                      (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+                    )
+                  )
+                  (bn2): GBufferNorm(
+                    (_norm): GroupNorm(8, 64, eps=1e-05, affine=False)
+                    (_conv): Sequential(
+                      (0): ResBlock(
+                        (conv): Sequential(
+                          (0): ReplicationPad2d((1, 1, 1, 1))
+                          (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1))
+                          (2): ReLU(inplace=True)
+                        )
+                        (relu): ReLU(inplace=True)
+                      )
+                    )
+                    (_scale): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                    (_bias): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+                  )
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): GroupNorm(8, 16, eps=1e-05, affine=True)
+                )
+                (2): Sequential(
+                  (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): GroupNorm(8, 16, eps=1e-05, affine=True)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+                    (2): GroupNorm(8, 32, eps=1e-05, affine=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), bias=False)
+                    (2): GroupNorm(8, 16, eps=1e-05, affine=True)
+                    (3): ReLU()
+                  )
+                  (1): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(16, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+                    (2): GroupNorm(8, 64, eps=1e-05, affine=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): ReplicationPad2d((1, 1, 1, 1))
+                    (1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+                    (2): GroupNorm(8, 64, eps=1e-05, affine=True)
+                  )
+                )
+                (2): None
+              )
+            )
+            (relu): ReLU()
+          )
+        )
+      )
+      (up_layers): ModuleList(
+        (0): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(96, 32, kernel_size=(3, 3), stride=(1, 1))
+          (2): GroupNorm(8, 32, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (1): Sequential(
+          (0): ReplicationPad2d((1, 1, 1, 1))
+          (1): Conv2d(48, 16, kernel_size=(3, 3), stride=(1, 1))
+          (2): GroupNorm(8, 16, eps=1e-05, affine=True)
+          (3): LeakyReLU(negative_slope=0.2, inplace=True)
+          (4): ReplicationPad2d((1, 1, 1, 1))
+          (5): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1))
+        )
+      )
+    )
+  )
+)

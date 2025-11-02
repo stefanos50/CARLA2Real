@@ -19,33 +19,17 @@ carla_world_settings:
 
 dataset_settings: #Generating a synthetic Dataset settings.
   export_dataset: False #Generate or not a dataset (available only in synchronous mode).
-  dataset_path: A:/ #The path of a disk for the dataset to be saved.
+  dataset_path: G:/ #The path of a disk for the dataset to be saved.
   images_format: png #png or jpg
   capture_when_static: False #Capture frames or not when the vehicle is not moving.
   speed_threshold: 0.1 #Capture frames or not if a vehicle is moving below a speed threshold.
   export_depth: True #Export or not depth buffer frames.
   export_semantic_gt: True #Export or not semantic segmentation ground truth labels.
+  export_instance_gt: True
   export_status_json: True #Export or not information about the ego vehicle (steer, throttle, brake, etc.) and world (weather, etc.).
   export_object_annotations: True #Export or not object detection annotations.
-  object_annotation_distance: 70 #Max distance to draw a bounding box.
-  object_dot_product_threshold: 0.5 #Dot product threshold. Refer to https://carla.readthedocs.io/en/latest/tuto_G_bounding_boxes/.
-  object_bbox_shape_threshold: 800 #Bounding box size threshold to filter small bounding boxes in the case of bikers.
-  object_bbox_min_extent: 0.5 #Bounding box extent constant to solve CARLA 0.9.14 bug for 2-wheel vehicles.
   object_visualize_annotations: True #Create or not a cv2 window to visualize the annotations in real-time.
-  object_annotations_classes: ['person','vehicle','truck','bus','motorcycle','bicycle','rider','traffic_light','traffic_sign'] #List with the classes to export annotations (available classes are 'person','vehicle','truck','bus','motorcycle','bicycle','rider','traffic_light','traffic_sign').
-  object_class_numpixel_threshold: {"person": 100, "vehicle": 250, "truck": 350, "bus": 350, "traffic_light": 10, "traffic_signs": 10,"motorcycle": 100, "bicycle": 100,"rider":150} #per class threshold of white pixels in the semantic segmentation mask to consider an object visible.
-  object_class_numpixel_zero_threshold: {"person": 100, "vehicle": 250, "truck": 350, "bus": 350, "traffic_light": 0, "traffic_signs": 0,"motorcycle": 200, "bicycle": 200,"rider":100} #per class threshold of black pixels in the semantic segmentation mask to consider that an object is not hidden from an object of the same class.
-
-  use_semantic_lidar: True #use semantic lidar for occlusion checks
-  use_only_semantic_lidar: False #use only semantic lidar (without semantic masks) for occlusion checks (not recommended with high traffic)
-  semantic_lidar_transform: [[5.2,-0.3,1.4],[0,0,-90]] #semantic lidar position and rotation coordinates (x,y,z)
-  semantic_lidar_channels: 128 
-  semantic_lidar_range: 1000
-  semantic_lidar_upper_fov: 100 #upper and lower fov can also affect the accuracy, we recommend experimenting with the parameters via the visualization
-  semantic_lidar_lower_fov: -100
-  semantic_lidar_points_per_second: 156000
-  semantic_lidar_rotation_frequency: 30 #this parameter should be perfectly synchronized with the fixed_time_step and the fps to get decent results, refer to https://carla.readthedocs.io/en/latest/ref_sensors/.
-  semantic_lidar_horizontal_fov: 360
+  object_annotations_classes: [12,14,15,16,18,19,13]
 
 other_sensors_settings: #Create or not Lidar,Radar,IMU and GNSS sensors. For their corresponding parameters below refer to https://carla.readthedocs.io/en/latest/ref_sensors/.
   use_lidar: False

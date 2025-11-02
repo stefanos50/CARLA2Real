@@ -1,11 +1,11 @@
 import logging
 import os
 import datetime
-from pascal_voc_writer import Writer
 import random
 from pathlib import Path
 import sys
 from PIL import Image
+from collections import Counter
 import numpy as np
 from scipy.io import savemat
 import torch
@@ -47,15 +47,36 @@ result_container = {}
 enh_height = 540
 enh_width = 960
 other_actor = None
-class_color = {"vehicle": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "truck": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "traffic_light": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "traffic_signs": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "bus": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "person": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "motorcycle": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "bicycle": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-               "rider": (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))}
+class_color = {14: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               15: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               7: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               8: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               16: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               12: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               18: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               19: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+               13: (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))}
+
+od_class_names = {
+  12: "person",
+  14: "vehicle",
+  15: "truck",
+  16: "bus",
+  18: "motorcycle",
+  19: "bicycle",
+  13: "rider"
+}
+
+yolo_class_names = {
+  12: 0,
+  14: 1,
+  15: 2,
+  16: 3,
+  18: 4,
+  19: 5,
+  13: 6
+}
+
 
 export_dataset_path = ""
 carla_config_path = ""
@@ -548,6 +569,15 @@ class BaseExperiment:
 
 
     def add_sensor(self,data,sensor_name):
+
+        if sensor_name == "instance_segmentation":
+            array = np.frombuffer(data.raw_data, dtype=np.uint8)
+            array = array.reshape((data.height, data.width, 4))[:, :, :3]
+            array = array[:, :, ::-1]
+            data_dict[sensor_name] = array
+            names_dict[sensor_name] = data.frame
+            return
+        
         data_dict[sensor_name] = data
         names_dict[sensor_name] = data.frame
 
@@ -656,6 +686,9 @@ class BaseExperiment:
         if carla_config['dataset_settings']['export_semantic_gt']:
             im = Image.fromarray(data_dict["semantic_segmentation"])
             im.save(export_dataset_path + "ADDataset/SemanticSegmentation/" + str(frame_id) + "." + str(carla_config['dataset_settings']['images_format']))
+        if carla_config['dataset_settings']['export_instance_gt']:
+            im = Image.fromarray(data_dict["instance_segmentation"])
+            im.save(export_dataset_path + "ADDataset/InstanceSegmentation/" + str(frame_id) + "." + str(carla_config['dataset_settings']['images_format']))
         if carla_config['dataset_settings']['export_depth']:
             im = Image.fromarray(data_dict["SceneDepth"])
             im.save(export_dataset_path + "ADDataset/Depth/" + str(frame_id) + "." + str(carla_config['dataset_settings']['images_format']))
@@ -690,6 +723,9 @@ class BaseExperiment:
         if not os.path.exists(export_dataset_path + "ADDataset" + "/SemanticSegmentation") and carla_config['dataset_settings']['export_semantic_gt']:
             os.makedirs(export_dataset_path + "ADDataset" + "/SemanticSegmentation")
             print(f"Folder SemanticSegmentation created successfully.")
+        if not os.path.exists(export_dataset_path + "ADDataset" + "/InstanceSegmentation") and carla_config['dataset_settings']['export_instance_gt']:
+            os.makedirs(export_dataset_path + "ADDataset" + "/InstanceSegmentation")
+            print(f"Folder InstanceSegmentation created successfully.")
         if not os.path.exists(export_dataset_path + "ADDataset" + "/WorldStatus") and carla_config['dataset_settings']['export_status_json']:
             os.makedirs(export_dataset_path + "ADDataset" + "/WorldStatus")
             print(f"Folder WorldStatus created successfully.")
@@ -759,263 +795,80 @@ class BaseExperiment:
                 print('\033[91m'+"Not compatible actor. Choose a vehicle or pederestrian actor instance.")
                 exit(1)
 
-    def get_image_point(self,loc, K, w2c):
 
-        point = np.array([loc.x, loc.y, loc.z, 1])
-
-        point_camera = np.dot(w2c, point)
-
-        point_camera = [point_camera[1], -point_camera[2], point_camera[0]]
-
-        point_img = np.dot(K, point_camera)
-
-        point_img[0] /= point_img[2]
-        point_img[1] /= point_img[2]
-
-        return point_img[0:2]
-
-    def build_projection_matrix(self,w, h, fov):
-        focal = w / (2.0 * np.tan(fov * np.pi / 360.0))
-        K = np.identity(3)
-        K[0, 0] = K[1, 1] = focal
-        K[0, 2] = w / 2.0
-        K[1, 2] = h / 2.0
-        return K
-
-    def get_vehicles_mask(self,detected_vehicle_mask,segmentation,detected_id):
-        vehicles_ids = [13,14,15,16,18,19]
-        for vid in vehicles_ids:
-            if vid == detected_id:
-                continue
-            vid_mask = (segmentation == vid)
-            detected_vehicle_mask = np.logical_or(detected_vehicle_mask,vid_mask)
-        return detected_vehicle_mask
-
-
-    def is_valid_bbox(self,bbox,segmentation,type,type_pixels_thresh,type_pixels_zero_thresh):
-        segmentation = segmentation[:,:,0]
-        type_map = {"person":12,"vehicle":14,"truck":15,"bus":16,"traffic_light":7,"traffic_signs":8,"motorcycle":18,"bicycle":19,"rider":13}
-
-        type_max_id = type_map[type]
-        type_mask = (segmentation == type_max_id)
-        type_mask_single = (segmentation == type_max_id)
-        if type_map[type] in [13,14,15,16,18,19]:
-            type_mask = self.get_vehicles_mask(type_mask,segmentation,type_map[type])
-        xmin, ymin, xmax, ymax = bbox
-        bottom_right = (int(xmax), int(ymax))
-        top_left = (int(xmin), int(ymin))
-        roi = type_mask.astype(np.uint8)[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
-        roi_single = type_mask_single.astype(np.uint8)[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
-        count_true_pixels = np.sum(roi == 1)
-        count_false_pixels = np.sum(roi == 0)
-        if count_true_pixels > type_pixels_thresh[type] and count_false_pixels > type_pixels_zero_thresh[type] and np.sum(roi_single == 1) > type_pixels_thresh[type]:
-            return True
-        else:
-            return False
-
-    def is_bbox_overlaping(self,bbox,bbox_list):
-        for bb in bbox_list:
-            outer_x1, outer_y1, outer_x2, outer_y2 = bbox
-            inner_x1, inner_y1, inner_x2, inner_y2 = bb
-            is_inside = (outer_x1 <= inner_x1) and (outer_y1 <= inner_y1) and (outer_x2 >= inner_x2) and (outer_y2 >= inner_y2)
-
-            if is_inside:
-                return True
-        return False
-
-    def bbox_from_mask(self,type,writer,carla_config,frame):
-        type_pixels_thresh = dict(carla_config['dataset_settings']['object_class_numpixel_threshold'])
-        type_map = {"person": 12, "vehicle": 14, "truck": 15, "bus": 16, "traffic_light": 7, "traffic_signs": 8,"motorcycle": 18, "bicycle": 19,"rider":13}
-        type_mask = (data_dict['semantic_segmentation'][:,:,0] == type_map[type])
-
-        lbl_0 = label(type_mask)
-        props = regionprops(lbl_0)
-        for prop in props:
-            x_min = prop.bbox[1]
-            y_min = prop.bbox[0]
-            x_max = prop.bbox[3]
-            y_max = prop.bbox[2]
-            bottom_right = (int(x_max), int(y_max))
-            top_left = (int(x_min), int(y_min))
-            roi = type_mask.astype(np.uint8)[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
-            count_true_pixels = np.sum(roi == 1)
-
-            if count_true_pixels > type_pixels_thresh[type] and (roi.shape[0] * roi.shape[1]) > carla_config['dataset_settings']['object_bbox_shape_threshold']:
-                writer.addObject(type, x_min, y_min, x_max, y_max)
-                cv2.rectangle(frame, (int(x_max), int(y_max)), (int(x_min), int(y_min)), class_color[type], 2)
-                cv2.putText(frame, type, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,class_color[type], 2)
-
-    #code from https://github.com/carla-simulator/carla/issues/3801
-    def get_bounding_box(self, actor, min_extent=0.5):
-        """
-        Some actors like motorbikes have a zero width bounding box. This is a fix to this issue.
-        """
-        if not hasattr(actor, "bounding_box"):
-            return carla.BoundingBox(carla.Location(0, 0, min_extent),
-                                     carla.Vector3D(x=min_extent, y=min_extent, z=min_extent))
-
-        bbox = actor.bounding_box
-
-        buggy_bbox = (bbox.extent.x * bbox.extent.y * bbox.extent.z == 0)
-        if buggy_bbox:
-            bbox.location = carla.Location(0, 0, max(bbox.extent.z, min_extent))
-
-        if bbox.extent.x < min_extent:
-            bbox.extent.x = min_extent
-        if bbox.extent.y < min_extent:
-            bbox.extent.y = min_extent
-        if bbox.extent.z < min_extent:
-            bbox.extent.z = min_extent
-
-        return bbox
-
-    def analyze_semantic_lidar_occlusion(self,actor_id):
-        global data_dict
-        if not ( 'lidar_semantic' in data_dict ):
-            return True
-
-        for detection in data_dict['lidar_semantic']:
-            if detection.object_idx == actor_id:
-                return True
-        return False
 
 
     def save_object_detection_annotations(self,camera,world,vehicle,frame_id,carla_config):
-        global class_colors
-        world_2_camera = np.array(camera.get_transform().get_inverse_matrix())
+            global class_colors, data_dict, od_class_names, export_dataset_path, yolo_class_names
+            world_2_camera = np.array(camera.get_transform().get_inverse_matrix())
 
-        image_w = int(carla_config['ego_vehicle_settings']['camera_width'])
-        image_h = int(carla_config['ego_vehicle_settings']['camera_height'])
-        image_fov = int(carla_config['ego_vehicle_settings']['camera_fov'])
-        listed_classes = list(carla_config['dataset_settings']['object_annotations_classes'])
-        object_max_distance = carla_config['dataset_settings']['object_annotation_distance']
-        dot_product_threshold = carla_config['dataset_settings']['object_dot_product_threshold']
-        bbox_min_extend = carla_config['dataset_settings']['object_bbox_min_extent']
-        current_frame = np.ascontiguousarray(data_dict['color_frame'], dtype=np.uint8)
-        current_frame = cv2.cvtColor(current_frame, cv2.COLOR_BGR2RGB)
+            image_w = int(carla_config['ego_vehicle_settings']['camera_width'])
+            image_h = int(carla_config['ego_vehicle_settings']['camera_height'])
+            image_fov = int(carla_config['ego_vehicle_settings']['camera_fov'])
+            listed_classes = list(carla_config['dataset_settings']['object_annotations_classes'])
+            
+            current_frame = np.ascontiguousarray(data_dict['color_frame'], dtype=np.uint8)
+            current_frame = cv2.cvtColor(current_frame, cv2.COLOR_BGR2RGB)
 
-        writer = Writer(export_dataset_path+"ADDataset/Frames/"+ str(frame_id) + '.png', image_w, image_h)
-        K = self.build_projection_matrix(image_w, image_h, image_fov)
 
-        vehicles = ['vehicle.dodge.charger_2020','vehicle.dodge.charger_police','vehicle.dodge.charger_police_2020','vehicle.ford.crown','vehicle.ford.mustang','vehicle.jeep.wrangler_rubicon','vehicle.lincoln.mkz_2017','vehicle.lincoln.mkz_2020'
-                    ,'vehicle.mercedes.coupe','vehicle.mercedes.coupe_2020','vehicle.micro.microlino','vehicle.mini.cooper_s','vehicle.mini.cooper_s_2021','vehicle.nissan.micra','vehicle.nissan.patrol','vehicle.nissan.patrol_2021',
-                    'vehicle.seat.leon','vehicle.tesla.model3','vehicle.toyota.prius','vehicle.audi.a2','vehicle.audi.etron','vehicle.audi.tt','vehicle.bmw.grandtourer','vehicle.chevrolet.impala','vehicle.citroen.c3']
-        trucks = ['vehicle.carlamotors.carlacola','vehicle.carlamotors.european_hgv','vehicle.carlamotors.firetruck','vehicle.tesla.cybertruck','vehicle.ford.ambulance','vehicle.mercedes.sprinter','vehicle.volkswagen.t2','vehicle.volkswagen.t2_2021']
-        buses = ['vehicle.mitsubishi.fusorosa']
-        motorcycles = ['vehicle.harley-davidson.low_rider','vehicle.kawasaki.ninja','vehicle.vespa.zx125','vehicle.yamaha.yzf']
-        bikes = ['vehicle.bh.crossbike','vehicle.diamondback.century','vehicle.gazelle.omafiets']
+            instance_img = data_dict['instance_segmentation']
+            instance_img = np.array(instance_img, dtype=np.uint16)
+            
+            #instance_img = (instance_img[:, :, 1] << 8) + instance_img[:, :, 2]
+            instance_img = instance_img[:, :, 0] + 256 * instance_img[:, :, 1] + 256**2 * instance_img[:, :, 2]
 
-        if 'rider' in listed_classes:
-            self.bbox_from_mask("rider", writer, carla_config, current_frame)
+            instance_ids = np.unique(instance_img)
+            instance_ids = instance_ids[instance_ids != 0]
 
-        bboxes_list = []
+            semantic_img = data_dict['semantic_segmentation'][:,:,2]
 
-        for npc in world.get_actors():
-            if npc.id != vehicle.id:
-                type = None
-                if npc.type_id.startswith('walker.pedestrian') and 'person' in listed_classes:
-                    type = 'person'
-                elif npc.type_id in vehicles and 'vehicle' in listed_classes:
-                    type = 'vehicle'
-                elif npc.type_id in trucks and 'truck' in listed_classes:
-                    type = 'truck'
-                elif npc.type_id in buses and 'bus' in listed_classes:
-                    type = 'bus'
-                elif npc.type_id in motorcycles and 'motorcycle' in listed_classes:
-                    type = 'motorcycle'
-                elif npc.type_id in bikes and 'bicycle' in listed_classes:
-                    type = 'bicycle'
-                else:
+            boxes = []
+            yolo_lines = []  # <-- ADDED
+
+            for inst_id in instance_ids:
+                mask = (instance_img == inst_id)
+                ys, xs = np.where(mask)
+                if ys.size == 0 or xs.size == 0:
                     continue
 
-                bb = self.get_bounding_box(npc,bbox_min_extend)
-                dist = npc.get_transform().location.distance(vehicle.get_transform().location)
-
-                if dist < object_max_distance:
-                    forward_vec = vehicle.get_transform().get_forward_vector()
-                    ray = npc.get_transform().location - vehicle.get_transform().location
-
-                    if forward_vec.dot(ray) > dot_product_threshold:
-
-                        if self.analyze_semantic_lidar_occlusion(npc.id) == False:
-                            continue
-
-                        x_max = -10000
-                        x_min = 10000
-                        y_max = -10000
-                        y_min = 10000
-                        verts = [v for v in bb.get_world_vertices(npc.get_transform())]
-                        for vert in verts:
-                            p = self.get_image_point(vert, K, world_2_camera)
-                            if p[0] > x_max:
-                                x_max = p[0]
-                            if p[0] < x_min:
-                                x_min = p[0]
-                            if p[1] > y_max:
-                                y_max = p[1]
-                            if p[1] < y_min:
-                                y_min = p[1]
-
-                        if x_min > 0 and x_max < image_w and y_min > 0 and y_max < image_h:
-                            if carla_config['dataset_settings']['use_only_semantic_lidar'] and carla_config['dataset_settings']['use_semantic_lidar']:
-                                writer.addObject(type, x_min, y_min, x_max, y_max)
-                                bboxes_list.append([int(x_min), int(y_min), int(x_max), int(y_max)])
-                                cv2.rectangle(current_frame, (int(x_max), int(y_max)), (int(x_min), int(y_min)), class_color[type], 2)
-                                cv2.putText(current_frame, type, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, class_color[type], 2)
-                                continue
+                x_min, x_max = xs.min(), xs.max()
+                y_min, y_max = ys.min(), ys.max()
+                width, height = x_max - x_min, y_max - y_min
 
 
-                            if self.is_valid_bbox([x_min, y_min, x_max, y_max], data_dict['semantic_segmentation'],type,dict(carla_config['dataset_settings']['object_class_numpixel_threshold']),dict(carla_config['dataset_settings']['object_class_numpixel_zero_threshold'])):
-                                writer.addObject(type, x_min, y_min, x_max, y_max)
-                                bboxes_list.append([int(x_min), int(y_min), int(x_max), int(y_max)])
-                                cv2.rectangle(current_frame, (int(x_max), int(y_max)), (int(x_min), int(y_min)), class_color[type], 2)
-                                cv2.putText(current_frame, type, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, class_color[type], 2)
+                # Get class ID from semantic segmentation
+                sem_values = semantic_img[mask]
+                class_id = Counter(sem_values).most_common(1)[0][0]  # <-- UNCHANGED
 
-        bounding_box_set = []
-        bbnames = []
-        if 'traffic_light' in listed_classes:
-            bounding_box_set = world.get_level_bbs(carla.CityObjectLabel.TrafficLight)
-            for n in range(len(bounding_box_set)):
-                bbnames.append("traffic_light")
-        if 'traffic_sign' in listed_classes:
-            bounding_box_set.extend(world.get_level_bbs(carla.CityObjectLabel.TrafficSigns))
-            for n in range(len(world.get_level_bbs(carla.CityObjectLabel.TrafficSigns))):
-                bbnames.append("traffic_signs")
-        if len(bounding_box_set) > 0:
-            for bb in range(len(bounding_box_set)):
-                if bounding_box_set[bb].location.distance(vehicle.get_transform().location) < object_max_distance:
-                    forward_vec = vehicle.get_transform().get_forward_vector()
-                    ray = bounding_box_set[bb].location - vehicle.get_transform().location
-                    if forward_vec.dot(ray) > dot_product_threshold:
+                # Filter by allowed semantic classes
+                if class_id not in listed_classes:
+                    continue
 
-                        x_max = -10000
-                        x_min = 10000
-                        y_max = -10000
-                        y_min = 10000
-                        verts = [v for v in bounding_box_set[bb].get_world_vertices(carla.Transform())]
-                        for vert in verts:
-                            p = self.get_image_point(vert, K, world_2_camera)
-                            if p[0] > x_max:
-                                x_max = p[0]
-                            if p[0] < x_min:
-                                x_min = p[0]
-                            if p[1] > y_max:
-                                y_max = p[1]
-                            if p[1] < y_min:
-                                y_min = p[1]
+                boxes.append((x_min, y_min, x_max, y_max, class_id))
 
+                cv2.rectangle(current_frame, (int(x_max), int(y_max)), (int(x_min), int(y_min)), class_color[class_id], 2)
+                cv2.putText(current_frame, od_class_names[class_id], (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, class_color[class_id], 2)
 
-                        if x_min > 0 and x_max < image_w and y_min > 0 and y_max < image_h:
-                            if self.is_valid_bbox([x_min, y_min, x_max, y_max], data_dict['semantic_segmentation'],bbnames[bb],dict(carla_config['dataset_settings']['object_class_numpixel_threshold']),dict(carla_config['dataset_settings']['object_class_numpixel_zero_threshold'])):
-                                writer.addObject(bbnames[bb], x_min, y_min, x_max, y_max)
-                                bboxes_list.append([int(x_min), int(y_min), int(x_max), int(y_max)])
-                                cv2.rectangle(current_frame, (int(x_max), int(y_max)), (int(x_min), int(y_min)), class_color[bbnames[bb]], 2)
-                                cv2.putText(current_frame, bbnames[bb], (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.3, class_color[bbnames[bb]], 2)
+                # --- ADDED: Save to YOLO format ---
+                x_center = ((x_min + x_max) / 2.0) / image_w
+                y_center = ((y_min + y_max) / 2.0) / image_h
+                w_norm = (x_max - x_min) / image_w
+                h_norm = (y_max - y_min) / image_h
+                yolo_lines.append(f"{yolo_class_names[class_id]} {x_center:.6f} {y_center:.6f} {w_norm:.6f} {h_norm:.6f}")
+                # ---------------------------------
 
-        writer.save(export_dataset_path + "ADDataset/ObjectDetection/" + str(frame_id) + ".xml")
+            # --- ADDED: Save YOLO txt file ---
+            import os
+            save_dir = os.path.join(export_dataset_path, "ADDataset", "ObjectDetection")
+            os.makedirs(save_dir, exist_ok=True)
+            save_path = os.path.join(save_dir, f"{frame_id}.txt")
+            with open(save_path, "w") as f:
+                f.write("\n".join(yolo_lines))
+            # ---------------------------------
 
-        if carla_config['dataset_settings']['object_visualize_annotations'] == True:
-            cv2.imshow('Object Detection Annotations', current_frame)
+            if carla_config['dataset_settings']['object_visualize_annotations'] == True:
+                cv2.imshow('Object Detection Annotations', current_frame)
+
 
     def initialize_scenario(self,world,scenario_config,vehicle):
         global other_actor
@@ -1408,6 +1261,8 @@ class BaseExperiment:
             data_length += 1
         if use_gnss:
             data_length += 1
+        if carla_config['dataset_settings']['export_object_annotations'] or carla_config['dataset_settings']['export_instance_gt']:
+            data_length += 1
 
         if selected_camera_output == 'enhanced' and carla_config['general']['run_enhanced_model'] == False:
             print('\033[91m'+"When using enhanced camera output the run_enhanced_model option must be enabled.")
@@ -1605,22 +1460,13 @@ class BaseExperiment:
             actor_list.append(gnss)
             print('created %s' % gnss.type_id)
 
-
-        if carla_config['dataset_settings']['use_semantic_lidar'] and export_dataset:
-            lidar_semantic_transform_conf = carla_config['dataset_settings']['semantic_lidar_transform']
-            lidar_semantic_sensor = world.get_blueprint_library().find('sensor.lidar.ray_cast_semantic')
-            lidar_semantic_transform = carla.Transform(carla.Location(x=lidar_semantic_transform_conf[0][0],y=lidar_semantic_transform_conf[0][1] ,z=lidar_semantic_transform_conf[0][2]),carla.Rotation(lidar_semantic_transform_conf[0][0],lidar_semantic_transform_conf[0][1],lidar_semantic_transform_conf[0][2]))
-            lidar_semantic_sensor.set_attribute('channels', str(carla_config['dataset_settings']['semantic_lidar_channels']))
-            lidar_semantic_sensor.set_attribute('range', str(carla_config['dataset_settings']['semantic_lidar_range']))
-            lidar_semantic_sensor.set_attribute('upper_fov', str(carla_config['dataset_settings']['semantic_lidar_upper_fov']))
-            lidar_semantic_sensor.set_attribute('points_per_second', str(carla_config['dataset_settings']['semantic_lidar_points_per_second']))
-            lidar_semantic_sensor.set_attribute('lower_fov', str(carla_config['dataset_settings']['semantic_lidar_lower_fov']))
-            lidar_semantic_sensor.set_attribute('rotation_frequency', str(carla_config['dataset_settings']['semantic_lidar_rotation_frequency']))
-            lidar_semantic_sensor.set_attribute('horizontal_fov', str(carla_config['dataset_settings']['semantic_lidar_horizontal_fov']))
-            lidar_semantic_sensor = world.spawn_actor(lidar_semantic_sensor, lidar_semantic_transform, attach_to=vehicle)
-            actor_list.append(lidar_semantic_sensor)
-            lidar_semantic_sensor.listen(lambda data: self.add_sensor(data, 'lidar_semantic'))
-            data_length += 1
+        if carla_config['dataset_settings']['export_object_annotations'] or carla_config['dataset_settings']['export_instance_gt']:
+            instance_bp = blueprint_library.find('sensor.camera.instance_segmentation')
+            instance_bp.set_attribute('image_size_x', str(carla_config['ego_vehicle_settings']['camera_width']))
+            instance_bp.set_attribute('image_size_y', str(carla_config['ego_vehicle_settings']['camera_height']))
+            instance_bp.set_attribute('fov', str(carla_config['ego_vehicle_settings']['camera_fov']))
+            actor_list.append(instance_bp)
+            cam_instance = world.spawn_actor(instance_bp, camera_transform, attach_to=vehicle)
 
 
         try:
@@ -1655,6 +1501,9 @@ class BaseExperiment:
                 gnss.listen(lambda data: self.add_sensor(data, 'gnss'))
             if use_imu:
                 imu.listen(lambda data: self.add_sensor(data, 'imu'))
+            if carla_config['dataset_settings']['export_object_annotations'] or carla_config['dataset_settings']['export_instance_gt']:
+                cam_instance.listen(lambda img: self.add_sensor(img,'instance_segmentation'))
+
 
             enh_width = carla_config['ego_vehicle_settings']['camera_width']
             enh_height = carla_config['ego_vehicle_settings']['camera_height']
