@@ -28,8 +28,10 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 ### Updates
 
-
 * **ToDo**: Integrate REGEN as an option.
+* **ToDo**: Add the option to use TensorRT through ONNX Runtime.
+* **03/11/2025**: Improved and simplified the object detection annotation algorithm by employing semantic and instance segmentation.
+* **03/11/2025**: Added the option to export instance segmentation label maps when generating synthetic datasets.
 * **26/08/2025**: Based on our latest research work, we now propose the REGEN framework, which increases EPE inference time by more than 32 times while removing the requirement for additional inputs (i.e., G-Buffers and semantic segmentation). We suggest visiting the [REGEN repository](https://github.com/stefanos50/REGEN) if:
     1. You want to easily enhance the photorealism of a pre-existing CARLA dataset with only the RGB images.
     2. You want fast inference of 30 fps or above.
