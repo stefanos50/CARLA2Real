@@ -66,7 +66,7 @@ This section provides a short summary of all the available data and pre-trained 
 ](https://www.nuscenes.org/).
      - [**Pre-trained Models**](https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link)
 3. Autonomous Driving
-   - Pre-trained models for [YOLOv5](https://github.com/ultralytics/yolov5) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
+   - Pre-trained models for [YOLO](https://docs.ultralytics.com/) and [DeepLabV3](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) trained on the original and enhanced (Cityscapes) CARLA frames.
      - [**Autonomous Driving Pre-trained Models**](https://drive.google.com/drive/folders/1ji2lymOjqbNDVS2VExZrSuJtFMaBZ9dI?usp=drive_link)  
 
 ### BibTeX Citation
@@ -244,7 +244,7 @@ To experiment with autonomous driving algorithms, read the samples located in th
 
 We provide functionalities for exporting a dataset with CARLA frames and their corresponding translated ones. This can be useful for comparing algorithms between CARLA and enhanced CARLA or training algorithms only on the enhanced frames. Models trained on enhanced frames are expected to perform better on real-life data compared to models trained on original frames due to the smaller sim2real gap. Currently, this feature is available only in synchronous mode because it is crucial for all data to be synchronized from the same frame ID to avoid an accuracy decrease or any other DL-related issue.
 
-Various data can be exported, including frames, ground truth labels for semantic segmentation, object detection annotations in PASCAL VOC format, and information about the world (weather, etc.), the vehicle (speed, steer, brake, etc.), and the depth of the scene. All these data can be individually enabled or disabled to save disk space if some of them are not needed for a specific task. Use the parameters inside `\code\config\carla_config.yaml` to control these export options.
+Various data can be exported, including frames, ground truth labels for semantic and instance segmentation, object detection annotations in YOLO format, and information about the world (weather, etc.), the vehicle (speed, steer, brake, etc.), and the depth of the scene. All these data can be individually enabled or disabled to save disk space if some of them are not needed for a specific task. Use the parameters inside `\code\config\carla_config.yaml` to control these export options.
 
 When exporting datasets, a common approach is to save data for every number of frames. This can be done by changing the parameter `skip_frames`. Exporting frames when the car is stuck at a traffic light or in any other location can be problematic because the dataset will end up with multiple frames containing the same information. For such cases, we provide the parameters `capture_when_static` and `speed_threshold`. If the parameter is set to false, then if the ego vehicle is static, data will not be saved. Also, by thresholding the speed of the vehicle, you can avoid exporting data if the vehicle is moving at a very slow speed to prevent having data that are very close. Adjust these parameters in the `\code\config\carla_config.yaml` file.
 
@@ -256,15 +256,17 @@ CARLA generates ground truth labels based on the UNREAL ENGINE 4 `custom stencil
 
 ### Object Detection
 
-For object detection, we offer nine distinct classes: `person, vehicle, truck, bus, motorcycle, bicycle, rider, traffic light, and traffic sign`. CARLA, however, lacks functionality to reference static meshes, such as bikers, for bounding boxes. Furthermore, `version 0.9.14` still exhibits some bugs related to bounding box accuracy. Since the engine is aware of the position of all objects in the virtual world, it does not consider occlusion when drawing bounding boxes for objects. To mitigate these issues, we provide parameters in `/code/config/carla_config.yaml`, primarily based on ground truth label masks alongside a semantic lidar sensor for occlusion checks, to allow for parametrization based on the specific problem at hand. Depending on the desired annotations, additional check statements or code modifications may be necessary. These adjustments can be made within `/code/epe/experiment/BaseExperiment.py`, specifically in the function `save_object_detection_annotations()`. To generate annotations for a specific model, such as YOLOv5, you can either modify the latter function or utilize a script that converts PASCAL VOC format to the target model's format.
+For object detection, we offer seven distinct classes: `person, vehicle, truck, bus, motorcycle, bicycle, and rider`. CARLA, however, lacks functionality to reference static meshes, such as bikers, for bounding boxes. Furthermore, `version 0.9.14` still exhibits some bugs related to bounding box accuracy. Since the engine is aware of the position of all objects in the virtual world, it does not consider occlusion when drawing bounding boxes for objects. To mitigate these issues, we employ instance segmentation to extract bounding boxes from each instance's mask. To determine the class ID of each instance, the semantic segmentation label map is utilized. Depending on the desired annotations, additional check statements or code modifications may be necessary. These adjustments can be made within `/code/epe/experiment/BaseExperiment.py`, specifically in the function `save_object_detection_annotations()`. Otherwise, it is suggested to extract both instance and semantic segmentation maps when generating the dataset to post-process the object detection annotations in a later step. To train a YOLO model with the resulting dataset, use the following `data.yaml` file: 
 
-> 📝 **Note**: We include the `coco2yolo.py` script inside `\code\epe\dataset_generation` that preprocesses the object detection annotations to a YOLO-compatible format, as it is the most common model used for such a task. The code is based on [this solution](https://medium.com/@WamiqRaza/convert-coco-format-annotations-to-yolo-format-4380880d9b3b) with some modifications.
+```javascript
+path: <path-to-dataset>
+train: <path-to-dataset>/train
+val: <path-to-dataset>/valid
+test: <path-to-dataset>/test
 
-> ⚠️ **Warning**: To aquire adequate results from the Semantic Lidar sensor, since the data extraction method executes only in synchronous mode, its essential to achieve proper synchronization between the sensor rotation and the world steps (`fixed_time_step` and `semantic_lidar_rotation_frequency` parameters). For more detailed information, refer to the [CARLA sensors documentation](https://carla.readthedocs.io/en/latest/ref_sensors/).
-
-> ⚠️ **Warning**: Parked vehicles are not considered actors, and their extraction of bounding boxes is impossible via the Python API. In that case, use the Opt version of the selected town (Town10HD_Opt, Town01_Opt, etc.), and our implementation will remove all the parked vehicles from the world. Moreover, the Cybertruck vehicle seems to have issues with the bounding boxes, so we recommend filtering it for object detection dataset generation.
-
-> 💡 **Hint**: To overcome the occlusion challenges for bounding box annotations, an ideal approach is to utilize the instance segmentation sensor since each object has its own unique semantic mask. Although CARLA provides such a sensor, there is no direct matching between the instance IDs and the actor IDs without modifying the source code. You can find more information in the following GitHub discussion [#5047](https://github.com/carla-simulator/carla/discussions/5047).
+nc: 7
+names: ['person', 'rider', 'vehicle', 'truck', 'bus', 'motorcycle', 'bicycle']
+```
 
 ### Scenarios
 
