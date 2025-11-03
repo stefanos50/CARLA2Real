@@ -131,6 +131,7 @@ cd /d <path-to>/code/
 pip install -r requirements.txt
 pip install -e ./
 conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install ultralytics
 y
 conda install -c conda-forge faiss-gpu
 cd /d epe
