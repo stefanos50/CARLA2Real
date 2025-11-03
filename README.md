@@ -29,7 +29,7 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 ### Updates
 
 * **ToDo**: Integrate REGEN as an option.
-* **ToDo**: Add the option to use TensorRT through ONNX Runtime.
+* **04/11/2025**: Added support for TensorRT through ONNX Runtime with improved inference speed (0.08 seconds with RTX 4090) and lower VRAM requirements (10 GB).
 * **03/11/2025**: Improved and simplified the object detection annotation algorithm by employing semantic and instance segmentation. Changed the annotation format from PASCAL VOC to YOLO.
 * **03/11/2025**: Added the option to export instance segmentation label maps when generating synthetic datasets.
 * **26/08/2025**: Based on our latest research work, we now propose the REGEN framework, which increases EPE inference time by more than 32 times while removing the requirement for additional inputs (i.e., G-Buffers and semantic segmentation). We suggest visiting the [REGEN repository](https://github.com/stefanos50/REGEN) if:
