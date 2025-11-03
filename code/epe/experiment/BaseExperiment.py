@@ -1143,6 +1143,10 @@ class BaseExperiment:
             print('\033[91m' + "Async data transfer is only supported in asynchronous mode using tensorrt compiler and enhanced camera output.")
             exit(1)
 
+        if not carla_config['onnx_runtime_settings']['execution_provider'] in ['CUDAExecutionProvider', 'TensorrtExecutionProvider']:
+            print('\033[91m'+"Invalid parameter for execution_provider. Valid values are ['CUDAExecutionProvider', 'TensorrtExecutionProvider'.")
+            exit(1)
+
         if "Rain" in carla_config['carla_world_settings']['weather_preset'] and "cityscapes" in self.weight_init:
             print('\033[93m' + "Warning...If you select rain weather presets with Cityscapes pretrained models we recommend enabling no_render_mode perameter.")
 
@@ -1240,6 +1244,9 @@ class BaseExperiment:
         use_gnss = carla_config['other_sensors_settings']['use_gnss']
         compiler = carla_config['general']['compiler']
         async_data_transfer = carla_config['general']['async_data_transfer']
+        execution_provider = carla_config['onnx_runtime_settings']['execution_provider']
+        enable_fp16_onnx = carla_config['onnx_runtime_settings']['enable_fp16']
+
         onnx_path = "..\\checkpoints\\ONNX\\"+self.weight_init+".onnx"
         dtype = carla_config['general']['data_type']
         rl_ego_transform = None
@@ -1292,21 +1299,29 @@ class BaseExperiment:
                     model_fp16 = onnxconverter_common.convert_float_to_float16(model)
                     onnx.save(model_fp16, os.path.join("..\checkpoints\ONNX",self.weight_init+"_fp16.onnx"))
                 onnx_path = os.path.join("..\checkpoints\ONNX",self.weight_init+"_fp16.onnx")
-            session = onnxruntime.InferenceSession(
+            
+            if execution_provider == "TensorrtExecutionProvider" and enable_fp16_onnx:
+                print("Exporting tensorrt engine, please wait...")
+                session = onnxruntime.InferenceSession(
                 onnx_path,
                 opts,
                 providers=[
-                    (
-                        "CUDAExecutionProvider",
-                        {
-                            "device_id": 0,
-                            "cudnn_conv_use_max_workspace": "1",
-                            "cudnn_conv_algo_search": "DEFAULT",
-                        },
-                    ),
-                    "CPUExecutionProvider",
-                ],
-            )
+                    ("TensorrtExecutionProvider", {
+                        "trt_fp16_enable": True,
+                    }),
+                    "CUDAExecutionProvider"
+                ]
+                )
+            else:
+                if execution_provider == "TensorrtExecutionProvider":
+                    print("Exporting tensorrt engine, please wait...")
+                session = onnxruntime.InferenceSession(
+                    onnx_path,
+                    opts,
+                    providers=[
+                        execution_provider
+                    ],
+                )
             io_binding = session.io_binding()
         elif compiler == 'tensorrt':
             try:
