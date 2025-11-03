@@ -249,7 +249,8 @@ Various data can be exported, including frames, ground truth labels for semantic
 
 When exporting datasets, a common approach is to save data for every number of frames. This can be done by changing the parameter `skip_frames`. Exporting frames when the car is stuck at a traffic light or in any other location can be problematic because the dataset will end up with multiple frames containing the same information. For such cases, we provide the parameters `capture_when_static` and `speed_threshold`. If the parameter is set to false, then if the ego vehicle is static, data will not be saved. Also, by thresholding the speed of the vehicle, you can avoid exporting data if the vehicle is moving at a very slow speed to prevent having data that are very close. Adjust these parameters in the `\code\config\carla_config.yaml` file.
 
-![Annotations](https://drive.google.com/thumbnail?id=1NvzD1kOVAEG4j6MA9mcW2MV2WpoGay75&sz=w1000)
+![Annotations](https://drive.google.com/thumbnail?id=1YhwOUhqiH_LWr61a9NbFVM76IBE2KYC1&sz=w1000)
+
 
 ### Semantic Segmentation
 
