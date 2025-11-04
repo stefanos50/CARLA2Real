@@ -152,6 +152,8 @@ The available pre-trained models (Pytorch, ONNX, and TensorRT) for [Cityscapes](
 
 ### Installing TensorRT (Optional)
 
+#### Official TensorRT Installation
+
 Nvidia's TensorRT is utilized to optimize and improve inference performance for handling a model of this size. While installing PyTorch and ONNX Runtime is straightforward using `pip install`, TensorRT requires additional steps for installation. Begin by checking if your hardware supports TensorRT and identifying any other dependencies required based on your hardware configuration. For instance, RTX 4090 works only with CUDA 11.8 (or newer) for TensorRT. Refer to the [**TensorRT support matrix**](https://docs.nvidia.com/deeplearning/tensorrt/support-matrix/index.html) for compatibility information.
 
 If your hardware supports TensorRT, follow the [**installation guide**](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html) provided in the NVIDIA documentation. After installation, it is crucial to specify the path to the `common.py` script, which is bundled with TensorRT, by configuring the `tensorrt_common_path` parameter inside the CARLA config YAML file.
@@ -159,6 +161,10 @@ If your hardware supports TensorRT, follow the [**installation guide**](https://
 > 📝 **Note**: TensorRT is recommended for achieving the best inference performance, but it is not mandatory to run the code. PyTorch and ONNX Runtime can be selected through the `compiler` parameter inside the CARLA config file, and they do not require the installation of TensorRT.
 
 > ⚠️ **Warning**: This project was developed and tested using TensorRT `version 8.6.1.6` exclusively.
+
+#### ONNX Runtime TensorRT Installation
+
+To run TensorRT through ONNX Runtime, visit [the ONNX Runtime TensorRT](https://onnxruntime.ai/docs/execution-providers/TensorRT-ExecutionProvider.html) page and install compatible versions of ONNX Runtime, CUDA, and TensorRT. This project was tested with `TensorRT 10.2`, `ONNX Runtime 1.19`, and `CUDA 12.6`. To install TensorRT in Windows, download the compatible version from [here](https://developer.nvidia.com/tensorrt). Then, extract the content of TensorRT to a disk and add the `lib` and `bin` directories to the environment variables. Finally, restart Anaconda for the changes to take effect.
 
 # Training & Dataset
 
