@@ -79,9 +79,9 @@ If you used the CARLA2Real tool or any dataset from this repository in a scienti
   journal={IEEE Transactions on Intelligent Transportation Systems}, 
   title={CARLA2Real: A Tool for Reducing the Sim2real Appearance Gap in CARLA Simulator}, 
   year={2025},
-  volume={},
-  number={},
-  pages={1-15},
+  volume={26},
+  number={11},
+  pages={18747-18761},
   keywords={Translation;Synthetic data;Visualization;Training;Feature extraction;Engines;Autonomous vehicles;Semantic segmentation;Photorealism;Games;Sim2real gap;CARLA simulator;computer vision;image processing;autonomous driving},
   doi={10.1109/TITS.2025.3597010}}
 
