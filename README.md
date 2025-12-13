@@ -28,7 +28,7 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 ### Extending the models to other domains
 
-Except for autonomous driving simulation scenarios, the pretrained models included in this repository have been employed (and tested) for crowd simulation through Closed-Circuit Television (CCTV) and Body Worn Cameras (BWC) in indoor environments rendered with Unreal Engine 5. If you are interested in enhancing the photorealism of a synthetic dataset that is not related to the domain of autonomous driving, we suggest reading our latest publication, ["Photorealistic Synthetic Crowds Simulation in Indoor environments (PSCS-I): a novel synthetic dataset for realistic simulation of crowd panic and violence behaviors"](https://ieeexplore.ieee.org/document/11267404) [[code]](https://github.com/stefanos50/PSCS-I)[[Sample Data]](https://www.kaggle.com/datasets/stefanospasios/synthetic-crowds-simulation-pscs-i).
+Except for autonomous driving simulation scenarios, the pretrained models included in this repository have been employed (and tested) for crowd simulation through Closed-Circuit Television (CCTV) and Body Worn Cameras (BWC) in indoor environments rendered with Unreal Engine 5. If you are interested in enhancing the photorealism of a synthetic dataset that is not related to the domain of autonomous driving, we suggest reading our latest publication, ["Photorealistic Synthetic Crowds Simulation in Indoor environments (PSCS-I): a novel synthetic dataset for realistic simulation of crowd panic and violence behaviors"](https://ieeexplore.ieee.org/document/11267404) [[code]](https://github.com/stefanos50/PSCS-I) [[Sample Data]](https://www.kaggle.com/datasets/stefanospasios/synthetic-crowds-simulation-pscs-i).
 
 ### Updates
 
