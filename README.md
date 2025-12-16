@@ -239,6 +239,16 @@ python EPEExperiment.py infer <path-to>\code\config\infer_pfd2cs.yaml --log=info
 ```
 The `\code\config\carla_config.yaml` file contains all the available parameters, and it is mandatory to provide it as an argument when inferencing in real-time, but not in all other cases.
 
+# REGEN
+
+CARLA2Real now also supports inference with the **REGEN** method, which significantly improves performance compared to **EPE**, achieving inference speeds of **over 30 FPS**.
+
+To use **REGEN**, open the `code/config/carla_config.yaml` file and change the `general/method` field from `EPE` to `REGEN`. In addition, update `REGEN_settings/checkpoint_name` with the name of one of the provided REGEN models, after installing the corresponding checkpoints in the `checkpoints/REGEN` directory.
+
+Currently, **REGEN is supported only with PyTorch**, and therefore changing the `compiler` parameter will have no effect when using this method.
+
+To train REGEN models towards to the characteristics of different datasets, please visit the [official REGEN repository](https://github.com/stefanos50/REGEN).
+
 # Experimenting
 For experimenting with our code, we provide a `carla_config` file containing most of the parameters, along with a number of Python samples. In the next chapters, we will present some of the basic functionalities. More in-depth information for each parameter or function can be found via comments in the `code` or next to each parameter inside the `yaml` files.
 
@@ -256,16 +266,6 @@ Various data can be exported, including frames, ground truth labels for semantic
 When exporting datasets, a common approach is to save data for every number of frames. This can be done by changing the parameter `skip_frames`. Exporting frames when the car is stuck at a traffic light or in any other location can be problematic because the dataset will end up with multiple frames containing the same information. For such cases, we provide the parameters `capture_when_static` and `speed_threshold`. If the parameter is set to false, then if the ego vehicle is static, data will not be saved. Also, by thresholding the speed of the vehicle, you can avoid exporting data if the vehicle is moving at a very slow speed to prevent having data that are very close. Adjust these parameters in the `\code\config\carla_config.yaml` file.
 
 ![Annotations](https://drive.google.com/thumbnail?id=1YhwOUhqiH_LWr61a9NbFVM76IBE2KYC1&sz=w1000)
-
-# REGEN
-
-CARLA2Real now also supports inference with the **REGEN** method, which significantly improves performance compared to **EPE**, achieving inference speeds of **over 30 FPS**.
-
-To use **REGEN**, open the `code/config/carla_config.yaml` file and change the `general/method` field from `EPE` to `REGEN`. In addition, update `REGEN_settings/checkpoint_name` with the name of one of the provided REGEN models, after installing the corresponding checkpoints in the `checkpoints/REGEN` directory.
-
-Currently, **REGEN is supported only with PyTorch**, and therefore changing the `compiler` parameter will have no effect when using this method.
-
-To train REGEN models towards to the characteristics of different datasets, please visit the [official REGEN repository](https://github.com/stefanos50/REGEN).
 
 
 ### Semantic Segmentation
