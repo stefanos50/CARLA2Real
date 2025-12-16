@@ -1,0 +1,1 @@
+In this directory, drop the content of the REGEN directory that can be downloaded from https://drive.google.com/drive/folders/1WF1RCE-AUWFXdZdWUt3wMbrbBCHrTVCX?usp=drive_link. This specific directory includes the pretrained models for the REGEN method.

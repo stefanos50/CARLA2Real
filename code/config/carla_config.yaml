@@ -19,7 +19,7 @@ carla_world_settings:
 
 dataset_settings: #Generating a synthetic Dataset settings.
   export_dataset: False #Generate or not a dataset (available only in synchronous mode).
-  dataset_path: G:/ #The path of a disk for the dataset to be saved.
+  dataset_path: E:/ #The path of a disk for the dataset to be saved.
   images_format: png #png or jpg
   capture_when_static: False #Capture frames or not when the vehicle is not moving.
   speed_threshold: 0.1 #Capture frames or not if a vehicle is moving below a speed threshold.
@@ -85,7 +85,19 @@ general:
   async_data_transfer: False #Transfer the data asynchronously to the GPU. This is available only in asynchronous mode and has high CPU requirements.
   calibration_dataset: K:\code\config\data\val.txt #A small input dataset in txt format (images, buffers, and gt labels paths) to use for calibration when using TensorRT with INT8 data type.
   visualize_buffers: True #Enable or Disable a CV2 window that visualizes G-Buffers. This is just to demonstrate the EPE approach. Disable it to improve the performance.
+  method: EPE #EPE or REGEN
   
 onnx_runtime_settings:
   execution_provider: "CUDAExecutionProvider" #CUDAExecutionProvider or TensorrtExecutionProvider
   enable_fp16: True #this is used when execution_provider is set to TensorrtExecutionProvider. Keep it enabled for fast inference speed.
+
+REGEN_settings: #change these settings only if you trained custom REGEN models with different parameters
+  checkpoint_name: "carla2kitti.pth" #change with the checkpoint name (not the entire path)
+  input_nc: 3
+  output_nc: 3
+  ngf: 64
+  netG: global
+  norm: instance
+  n_downsample_global: 4
+  n_blocks_global: 9
+  n_local_enhancers: 0

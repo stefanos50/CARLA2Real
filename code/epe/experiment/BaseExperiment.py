@@ -22,6 +22,7 @@ from epe.autonomous_driving.ad_model import ADModel
 from epe.autonomous_driving.rl_model import RLModel
 from epe.autonomous_driving.rl_environment import AutonomousDrivingEnvironment
 from epe.autonomous_driving.ad_task import ADTask
+from epe.REGEN import regen_generator
 from contextlib import contextmanager
 import string
 from torch import Tensor, ByteTensor
@@ -598,12 +599,17 @@ class BaseExperiment:
             data_dict["semantic_segmentation"] = data_dict[name]
             names_dict["semantic_segmentation"] = names_dict[name]
 
-    def make_image(self):
+    def make_image(self, method):
         # img = self.convert_image_to_array(color_frame_list[0])
         img = data_dict['color_frame']
 
         # renderObject.surface = pygame.surfarray.make_surface(img.swapaxes(0, 1))
-        result = mat2tensor(img.astype(np.float32) / 255.0)
+        if method == "EPE":
+            result = mat2tensor(img.astype(np.float32) / 255.0)
+        else:
+            img = np.ascontiguousarray(img)
+            result = torch.from_numpy(img).permute(2, 0, 1).float() / 127.5 - 1
+            result = result.unsqueeze(0)
         return result
 
     # Function 2 to be executed on a separate thread
@@ -619,19 +625,29 @@ class BaseExperiment:
         result = mat2tensor(self.make_gbuffer_matrix().astype(np.float32))
         return result
 
-    def render_thread(self, queue, render_screen):
+    def render_thread(self, queue, render_screen, method):
         while True:
             argument = queue.get()
             if argument is None:
                 break
-            img = (argument[0, ...].clamp(min=0, max=1).permute(1, 2, 0) * 255.0).detach().cpu().numpy().astype(np.uint8)
+            img =  self.process_final_image(argument, method)
             render_screen.surface = pygame.surfarray.make_surface(img[:, :, :3].swapaxes(0, 1))
+    
+    def process_final_image(self, output, method):
+        if method == "EPE":
+            return (output[0, ...].clamp(min=0, max=1).permute(1, 2, 0) * 255.0).detach().cpu().numpy().astype(np.uint8)
+        else:
+            out_img = output[0].cpu().permute(1, 2, 0).numpy()
+            out_img = ((out_img + 1) * 127.5).clip(0, 255).astype(np.uint8)
+            #out_img = cv2.cvtColor(out_img, cv2.COLOR_RGB2BGR)
+            return out_img
 
-    def preprocess_worker(self, name, comp, inputs):
+
+    def preprocess_worker(self, name, comp, inputs, method):
         global result_container
         nameid = 0
         if name == "frame":
-            result = self.make_image()
+            result = self.make_image(method)
             nameid = 0
         elif name == "gt_labels":
             result = self.make_gtlabels()
@@ -673,10 +689,9 @@ class BaseExperiment:
         with open(export_dataset_path + "ADDataset/WorldStatus/" + str(frame_id) + ".json", "w") as outfile:
             json.dump(world_status, outfile)
 
-    def save_frames(self, frame_id, enhanced_frame, carla_config):
-        enhanced_frame = (
-                    enhanced_frame[0, ...].clamp(min=0, max=1).permute(1, 2, 0) * 255.0).detach().cpu().numpy().astype(
-            np.uint8)
+    def save_frames(self, frame_id, enhanced_frame, carla_config, method):
+        enhanced_frame = self.process_final_image(enhanced_frame, method)
+
         im = Image.fromarray(enhanced_frame[:, :, :3])
         im.save(export_dataset_path + "ADDataset/EnhancedFrames/" + str(frame_id) + "." + str(carla_config['dataset_settings']['images_format']))
 
@@ -1142,6 +1157,10 @@ class BaseExperiment:
         if carla_config['general']['async_data_transfer'] == True and (not carla_config['general']['compiler'] == 'tensorrt' or not carla_config['carla_world_settings']['camera_output'] == 'enhanced' or carla_config['carla_world_settings']['sync_mode'] == True):
             print('\033[91m' + "Async data transfer is only supported in asynchronous mode using tensorrt compiler and enhanced camera output.")
             exit(1)
+        
+        if not carla_config['general']['method'] in ['EPE','REGEN']:
+            print('\033[91m' + "The supported methods are EPE and REGEN. Available options: ['EPE','REGEN']")
+            exit(1)
 
         if not carla_config['onnx_runtime_settings']['execution_provider'] in ['CUDAExecutionProvider', 'TensorrtExecutionProvider']:
             print('\033[91m'+"Invalid parameter for execution_provider. Valid values are ['CUDAExecutionProvider', 'TensorrtExecutionProvider'.")
@@ -1150,12 +1169,12 @@ class BaseExperiment:
         if "Rain" in carla_config['carla_world_settings']['weather_preset'] and "cityscapes" in self.weight_init:
             print('\033[93m' + "Warning...If you select rain weather presets with Cityscapes pretrained models we recommend enabling no_render_mode perameter.")
 
-    def host_device_thread(self,inputs,expected_data):
+    def host_device_thread(self,inputs,expected_data,method):
         while True:
             try:
                 global data_dict
                 if len(data_dict) == expected_data:
-                    img = np.expand_dims(self.make_image(), axis=0)
+                    img = np.expand_dims(self.make_image(method), axis=0)
                     gb = np.expand_dims(self.make_gbuffers(), axis=0)
                     gt = np.expand_dims(self.make_gtlabels(), axis=0)
                     inputs[0].host = img
@@ -1246,6 +1265,7 @@ class BaseExperiment:
         async_data_transfer = carla_config['general']['async_data_transfer']
         execution_provider = carla_config['onnx_runtime_settings']['execution_provider']
         enable_fp16_onnx = carla_config['onnx_runtime_settings']['enable_fp16']
+        infer_method = carla_config['general']['method']
 
         onnx_path = "..\\checkpoints\\ONNX\\"+self.weight_init+".onnx"
         dtype = carla_config['general']['data_type']
@@ -1274,6 +1294,9 @@ class BaseExperiment:
         if selected_camera_output == 'enhanced' and carla_config['general']['run_enhanced_model'] == False:
             print('\033[91m'+"When using enhanced camera output the run_enhanced_model option must be enabled.")
             exit(1)
+
+        if infer_method == "REGEN": #REGEN supports only pytorch
+            compiler = "pytorch"           
 
         if export_dataset == True:
             self.create_dataset_folders(carla_config)
@@ -1347,8 +1370,27 @@ class BaseExperiment:
                 compiler = 'pytorch'
 
         #if pytorch compiler is not used then delete the pytorch model and free the memory
-        if compiler == 'tensorrt' or compiler == 'onnxruntime':
+        if compiler == 'tensorrt' or compiler == 'onnxruntime' or infer_method == "REGEN":
             del self.network.generator
+        
+        if infer_method == "REGEN":
+            generator_ema = regen_generator.define_G(
+                input_nc= int(carla_config['REGEN_settings']['input_nc']),
+                output_nc= int(carla_config['REGEN_settings']['output_nc']),
+                ngf=int(carla_config['REGEN_settings']['ngf']),
+                netG=str(carla_config['REGEN_settings']['netG']),
+                norm=str(carla_config['REGEN_settings']['norm']),
+                n_downsample_global= int(carla_config['REGEN_settings']['n_downsample_global']),
+                n_blocks_global= int(carla_config['REGEN_settings']['n_blocks_global']),
+                n_local_enhancers= int(carla_config['REGEN_settings']['n_local_enhancers'])
+            ).to(self.device)
+
+            checkpoint = torch.load(os.path.join("..\checkpoints\REGEN", str(carla_config['REGEN_settings']['checkpoint_name'])), map_location=self.device)
+            generator_ema.load_state_dict(checkpoint)
+            generator_ema.eval()
+
+
+            
 
         world = client.get_world()
         world = client.load_world(selected_town, carla.MapLayer.Buildings | carla.MapLayer.ParkedVehicles)
@@ -1531,11 +1573,11 @@ class BaseExperiment:
             self.initialize_gt_labels(enh_width,enh_height,29)
 
             frame_queue = queue.Queue()
-            worker_thread = threading.Thread(target=self.render_thread, args=(frame_queue, renderObject,))
+            worker_thread = threading.Thread(target=self.render_thread, args=(frame_queue, renderObject, infer_method,))
             worker_thread.start()
 
             if async_data_transfer:
-                transfer_thread = threading.Thread(target=self.host_device_thread, args=(inputs,data_length))
+                transfer_thread = threading.Thread(target=self.host_device_thread, args=(inputs,data_length,infer_method,))
                 transfer_thread.start()
 
             done_simulation = False
@@ -1665,36 +1707,36 @@ class BaseExperiment:
                         while True:
                             if "color_frame" in data_dict and frame_found == False:
                                 frame_found = True
-                                frame_thread = threading.Thread(target=self.preprocess_worker, args=("frame",compiler,inputs,))
+                                frame_thread = threading.Thread(target=self.preprocess_worker, args=("frame",compiler,inputs,infer_method,))
                                 frame_thread.start()
 
                             if "semantic_segmentation" in data_dict and gt_labels_found == False:
                                 gt_labels_found = True
-                                gt_labels_thread = threading.Thread(target=self.preprocess_worker, args=("gt_labels",compiler,inputs,))
+                                gt_labels_thread = threading.Thread(target=self.preprocess_worker, args=("gt_labels",compiler,inputs,infer_method,))
                                 gt_labels_thread.start()
 
                             if "SceneColor" in data_dict and "SceneDepth" in data_dict and "GBufferA" in data_dict and "GBufferB" in data_dict and "GBufferC" in data_dict and "GBufferD" in data_dict and "GBufferSSAO" in data_dict and "CustomStencil" in data_dict and gbuffers_found == False:
                                 gbuffers_found = True
-                                gbuffers_thread = threading.Thread(target=self.preprocess_worker, args=("gbuffers",compiler,inputs,))
+                                gbuffers_thread = threading.Thread(target=self.preprocess_worker, args=("gbuffers",compiler,inputs,infer_method,))
                                 gbuffers_thread.start()
                             if len(data_dict) == data_length:
                                 if gbuffers_found == False:
-                                    gbuffers_thread = threading.Thread(target=self.preprocess_worker, args=("gbuffers",compiler,inputs,))
+                                    gbuffers_thread = threading.Thread(target=self.preprocess_worker, args=("gbuffers",compiler,inputs,infer_method,))
                                     gbuffers_thread.start()
                                 if frame_found == False:
-                                    frame_thread = threading.Thread(target=self.preprocess_worker, args=("frame",compiler,inputs,))
+                                    frame_thread = threading.Thread(target=self.preprocess_worker, args=("frame",compiler,inputs,infer_method,))
                                     frame_thread.start()
                                 if gt_labels_found == False:
-                                    gt_labels_thread = threading.Thread(target=self.preprocess_worker, args=("gt_labels",compiler,inputs,))
+                                    gt_labels_thread = threading.Thread(target=self.preprocess_worker, args=("gt_labels",compiler,inputs,infer_method,))
                                     gt_labels_thread.start()
                                 break
                     else:
                         if async_data_transfer == False:
-                            frame_thread = threading.Thread(target=self.preprocess_worker,args=("frame", compiler, inputs,))
+                            frame_thread = threading.Thread(target=self.preprocess_worker,args=("frame", compiler, inputs,infer_method,))
                             frame_thread.start()
-                            gbuffers_thread = threading.Thread(target=self.preprocess_worker,args=("gbuffers", compiler, inputs,))
+                            gbuffers_thread = threading.Thread(target=self.preprocess_worker,args=("gbuffers", compiler, inputs,infer_method,))
                             gbuffers_thread.start()
-                            gt_labels_thread = threading.Thread(target=self.preprocess_worker,args=("gt_labels", compiler, inputs,))
+                            gt_labels_thread = threading.Thread(target=self.preprocess_worker,args=("gt_labels", compiler, inputs,infer_method,))
                             gt_labels_thread.start()
                     if async_data_transfer == False:
                         frame_thread.join()
@@ -1739,11 +1781,18 @@ class BaseExperiment:
                             else:
                                 with torch.no_grad():
                                     with torch.cuda.amp.autocast_mode.autocast(dtype=forward_data_type):
-                                        batch = EPEBatch(img, gbuffers=gbuffers, gt_labels=label_map, robust_labels=None, path=None,coords=None).to(self.device)
-                                        infer_timer = time.time()
-                                        new_img = self.network.generator(batch)
-                                        print("Inference time: " + str(time.time() - infer_timer))
-                                        pass
+
+                                        if infer_method == "EPE":
+                                            batch = EPEBatch(img, gbuffers=gbuffers, gt_labels=label_map, robust_labels=None, path=None,coords=None).to(self.device)
+                                            infer_timer = time.time()
+                                            new_img = self.network.generator(batch)
+                                            print("Inference time: " + str(time.time() - infer_timer))
+                                            pass
+                                        else:
+                                            infer_timer = time.time()
+                                            new_img = generator_ema(img)
+                                            print("Inference time: " + str(time.time() - infer_timer))
+                                            pass
 
 
                         if carla_config['general']['pygame_output'] == 'enhanced' and carla_config['general']['run_enhanced_model'] == True:
@@ -1752,7 +1801,7 @@ class BaseExperiment:
                             renderObject.surface = pygame.surfarray.make_surface(data_dict['color_frame'].swapaxes(0, 1))
                         else:
                             if selected_camera_output == "enhanced" and carla_config['general']['run_enhanced_model'] == True:
-                                img = (new_img[0, ...].clamp(min=0, max=1).permute(1, 2, 0) * 255.0).detach().cpu().numpy().astype(np.uint8)
+                                img = self.process_final_image(new_img,infer_method)
                                 ad_task_frame = ad_task_ref.predict_output(img,np.ascontiguousarray(data_dict['semantic_segmentation']),world,vehicle,camera,data_dict)
                             else:
                                 img = np.ascontiguousarray(data_dict['color_frame'])
@@ -1760,8 +1809,7 @@ class BaseExperiment:
                             renderObject.surface = pygame.surfarray.make_surface(ad_task_frame.swapaxes(0, 1))
 
                         if selected_camera_output == "enhanced" and driving_mode == "ad_model":
-                            enhanced_frame = (new_img[0, ...].clamp(min=0, max=1) * 255.0).cpu().detach().numpy().astype(np.uint8)
-                            enhanced_frame = np.transpose(enhanced_frame, axes=(1, 2, 0))
+                            enhanced_frame = self.process_final_image(new_img,infer_method)
                             controls_predicted = autonomous_model.test_single(enhanced_frame)
                             print(controls_predicted)
                         elif selected_camera_output == "rgb" and driving_mode == "ad_model":
@@ -1781,8 +1829,7 @@ class BaseExperiment:
 
                         if driving_mode == "rl_train" or driving_mode == "rl_eval":
                             if selected_camera_output == "enhanced":
-                                next_state = (new_img[0, ...].clamp(min=0, max=1) * 255.0).cpu().detach().numpy().astype(np.uint8)
-                                next_state = np.transpose(next_state, axes=(1, 2, 0))
+                                next_state = self.process_final_image(new_img,infer_method)
                                 next_state = autonomous_agent.preprocess_camera_frame(next_state)
                             else:
                                 rgb_frame = autonomous_agent.preprocess_camera_frame(np.ascontiguousarray(data_dict['color_frame']))
@@ -1859,7 +1906,7 @@ class BaseExperiment:
                                 self.save_world_status(selected_town, selected_weather_preset, selected_vehicle_name,
                                                        selected_perspective, sync_mode,
                                                        random_id + str(names_dict['color_frame']))
-                            self.save_frames(random_id + str(names_dict['color_frame']), new_img, carla_config)
+                            self.save_frames(random_id + str(names_dict['color_frame']), new_img, carla_config, infer_method)
 
                             if carla_config['dataset_settings']['export_object_annotations']:
                                 self.save_object_detection_annotations(camera,world,vehicle,random_id + str(names_dict['color_frame']),carla_config)
