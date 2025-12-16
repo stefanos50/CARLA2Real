@@ -249,6 +249,8 @@ Currently, **REGEN is supported only with PyTorch**, and therefore changing the 
 
 To train REGEN models towards to the characteristics of different datasets, please visit the [official REGEN repository](https://github.com/stefanos50/REGEN).
 
+> 📝 **Note**: It is still required to install an EPE pretrained model in order to use REGEN method. However, the EPE weights will be unloaded from the GPU if REGEN is selected.
+
 # Experimenting
 For experimenting with our code, we provide a `carla_config` file containing most of the parameters, along with a number of Python samples. In the next chapters, we will present some of the basic functionalities. More in-depth information for each parameter or function can be found via comments in the `code` or next to each parameter inside the `yaml` files.
 
