@@ -32,7 +32,7 @@ Except for autonomous driving simulation scenarios, the pretrained models includ
 
 ### Updates
 
-* **16/12/2025**: Integrated REGEN method as an option for faster inference (see the documentation below).
+* **16/12/2025**: Integrated REGEN method (Cityscapes, KITTI, and nuScenes) as an option for faster inference (see the documentation below).
 * **04/11/2025**: Added support for TensorRT through ONNX Runtime with improved inference speed (0.08 seconds with RTX 4090) and lower VRAM requirements (10 GB).
 * **03/11/2025**: Improved and simplified the object detection annotation algorithm by employing semantic and instance segmentation. Changed the annotation format from PASCAL VOC to YOLO.
 * **03/11/2025**: Added the option to export instance segmentation label maps when generating synthetic datasets.
