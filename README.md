@@ -14,9 +14,6 @@
   <a href="https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla" target="_blank">
 <img alt="Static Badge" src="https://img.shields.io/badge/DATASET-cyan?style=for-the-badge&logo=kaggle&logoSize=auto">
   </a>
-    <a href="https://github.com/stefanos50/REGEN" target="_blank">
-<img alt="Static Badge" src="https://img.shields.io/badge/REGEN_Project-black?style=for-the-badge&logo=github&logoSize=auto">
-  </a>
 </div>
 
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
@@ -32,14 +29,10 @@ Except for autonomous driving simulation scenarios, the pretrained models includ
 
 ### Updates
 
-* **16/12/2025**: Integrated REGEN method (Cityscapes, KITTI, and nuScenes) as an option for faster inference (see the documentation below).
+* **16/12/2025**: Integrated [REGEN method](https://arxiv.org/abs/2508.17061) (Cityscapes, KITTI, and nuScenes) as an option for faster inference (see the documentation below).
 * **04/11/2025**: Added support for TensorRT through ONNX Runtime with improved inference speed (0.08 seconds with RTX 4090) and lower VRAM requirements (10 GB).
 * **03/11/2025**: Improved and simplified the object detection annotation algorithm by employing semantic and instance segmentation. Changed the annotation format from PASCAL VOC to YOLO.
 * **03/11/2025**: Added the option to export instance segmentation label maps when generating synthetic datasets.
-* **26/08/2025**: Based on our latest research work, we now propose the REGEN framework, which increases EPE inference time by more than 32 times while removing the requirement for additional inputs (i.e., G-Buffers and semantic segmentation). We suggest visiting the [REGEN repository](https://github.com/stefanos50/REGEN) if:
-    1. You want to easily enhance the photorealism of a pre-existing CARLA dataset with only the RGB images.
-    2. You want fast inference of 30 fps or above.
-    3. Have a low spec system.
 * **11/06/2025**: Added pretrained model for [nuScenes](https://www.nuscenes.org/).
 * **23/01/2025**: Added code for testing the models on the latest Unreal Engine 5 version of the CARLA simulator (including [sample UE5 results](https://drive.google.com/drive/folders/1N1DVn3UaiYn38fYeJa0NY9AIsHdlAldw?usp=sharing)).
 
