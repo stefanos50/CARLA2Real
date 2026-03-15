@@ -61,7 +61,7 @@ ego_vehicle_settings:
   vehicle_model: random  #random or any carla vehicle https://carla.readthedocs.io/en/latest/catalogue_vehicles/.
   camera_location: [5.2,-0.3,1.4] #the camera location will be used only if perspective = 2.
   camera_width: 960 #resolutions that are aligned to 256 for Windows system and CARLA 0.9.14.
-  camera_height: 540 #resolutions that are aligned to 256 for Windows system and CARLA 0.9.14.
+  camera_height: 544 #resolutions that are aligned to 256 for Windows system and CARLA 0.9.14.
   camera_fov: 90 #field of view of the camera.
   init_spawn_point: 7 #random or any point id or a transform [[10,10,10],[1,1,1]] ([location,rotation]).
 
@@ -84,8 +84,8 @@ general:
   tensorrt_common_path: K:\TensorRT-8.6.1.6\samples\python #the path where the common.py file is located inside TensorRT installation.
   async_data_transfer: False #Transfer the data asynchronously to the GPU. This is available only in asynchronous mode and has high CPU requirements.
   calibration_dataset: K:\code\config\data\val.txt #A small input dataset in txt format (images, buffers, and gt labels paths) to use for calibration when using TensorRT with INT8 data type.
-  visualize_buffers: True #Enable or Disable a CV2 window that visualizes G-Buffers. This is just to demonstrate the EPE approach. Disable it to improve the performance.
-  method: EPE #EPE or REGEN
+  visualize_buffers: False #Enable or Disable a CV2 window that visualizes G-Buffers. This is just to demonstrate the EPE approach. Disable it to improve the performance.
+  method: EPE #EPE or REGEN or HYPERGAN
   
 onnx_runtime_settings:
   execution_provider: "CUDAExecutionProvider" #CUDAExecutionProvider or TensorrtExecutionProvider
@@ -101,3 +101,6 @@ REGEN_settings: #change these settings only if you trained custom REGEN models w
   n_downsample_global: 4
   n_blocks_global: 9
   n_local_enhancers: 0
+
+HYPERGAN_settings: #change these settings only if you trained custom REGEN models with different parameters
+  checkpoint_name: "gta2cs.pth" #change with the checkpoint name (not the entire path)

@@ -23,6 +23,7 @@ from epe.autonomous_driving.rl_model import RLModel
 from epe.autonomous_driving.rl_environment import AutonomousDrivingEnvironment
 from epe.autonomous_driving.ad_task import ADTask
 from epe.REGEN import regen_generator
+from epe.REGEN import hypergan_generator
 from contextlib import contextmanager
 import string
 from torch import Tensor, ByteTensor
@@ -606,10 +607,16 @@ class BaseExperiment:
         # renderObject.surface = pygame.surfarray.make_surface(img.swapaxes(0, 1))
         if method == "EPE":
             result = mat2tensor(img.astype(np.float32) / 255.0)
-        else:
+        elif method == "REGEN":
             img = np.ascontiguousarray(img)
             result = torch.from_numpy(img).permute(2, 0, 1).float() / 127.5 - 1
             result = result.unsqueeze(0)
+        else:
+            img = np.ascontiguousarray(img)
+            result = torch.from_numpy(img).permute(2, 0, 1).float() / 255.0
+            result = (result - 0.5) / 0.5
+            result = result.unsqueeze(0)
+
         return result
 
     # Function 2 to be executed on a separate thread
@@ -636,10 +643,15 @@ class BaseExperiment:
     def process_final_image(self, output, method):
         if method == "EPE":
             return (output[0, ...].clamp(min=0, max=1).permute(1, 2, 0) * 255.0).detach().cpu().numpy().astype(np.uint8)
-        else:
+        elif method == "REGEN":
             out_img = output[0].cpu().permute(1, 2, 0).numpy()
             out_img = ((out_img + 1) * 127.5).clip(0, 255).astype(np.uint8)
             #out_img = cv2.cvtColor(out_img, cv2.COLOR_RGB2BGR)
+            return out_img
+        else:
+            out_img = output[0]
+            out_img = (out_img * 0.5 + 0.5).clamp(0, 1)
+            out_img = (out_img.permute(1, 2, 0).cpu().numpy() * 255).astype(np.uint8)
             return out_img
 
 
@@ -1158,8 +1170,8 @@ class BaseExperiment:
             print('\033[91m' + "Async data transfer is only supported in asynchronous mode using tensorrt compiler and enhanced camera output.")
             exit(1)
         
-        if not carla_config['general']['method'] in ['EPE','REGEN']:
-            print('\033[91m' + "The supported methods are EPE and REGEN. Available options: ['EPE','REGEN']")
+        if not carla_config['general']['method'] in ['EPE','REGEN','HYPERGAN']:
+            print('\033[91m' + "The supported methods are EPE and REGEN. Available options: ['EPE','REGEN','HYPERGAN']")
             exit(1)
 
         if not carla_config['onnx_runtime_settings']['execution_provider'] in ['CUDAExecutionProvider', 'TensorrtExecutionProvider']:
@@ -1295,7 +1307,7 @@ class BaseExperiment:
             print('\033[91m'+"When using enhanced camera output the run_enhanced_model option must be enabled.")
             exit(1)
 
-        if infer_method == "REGEN": #REGEN supports only pytorch
+        if infer_method == "REGEN" or infer_method == "HYPERGAN": #REGEN supports only pytorch
             compiler = "pytorch"           
 
         if export_dataset == True:
@@ -1370,7 +1382,7 @@ class BaseExperiment:
                 compiler = 'pytorch'
 
         #if pytorch compiler is not used then delete the pytorch model and free the memory
-        if compiler == 'tensorrt' or compiler == 'onnxruntime' or infer_method == "REGEN":
+        if compiler == 'tensorrt' or compiler == 'onnxruntime' or infer_method == "REGEN" or infer_method == "HYPERGAN":
             del self.network.generator
         
         if infer_method == "REGEN":
@@ -1387,6 +1399,11 @@ class BaseExperiment:
 
             checkpoint = torch.load(os.path.join("..\checkpoints\REGEN", str(carla_config['REGEN_settings']['checkpoint_name'])), map_location=self.device)
             generator_ema.load_state_dict(checkpoint)
+            generator_ema.eval()
+        
+        if infer_method == "HYPERGAN":
+            generator_ema = hypergan_generator.UNetGenerator().to(self.device)
+            generator_ema.load_state_dict(torch.load(os.path.join("..\checkpoints\HYPERGAN", str(carla_config['HYPERGAN_settings']['checkpoint_name'])), map_location=self.device))
             generator_ema.eval()
 
 
@@ -1788,7 +1805,7 @@ class BaseExperiment:
                                             new_img = self.network.generator(batch)
                                             print("Inference time: " + str(time.time() - infer_timer))
                                             pass
-                                        else:
+                                        elif infer_method:
                                             infer_timer = time.time()
                                             new_img = generator_ema(img)
                                             print("Inference time: " + str(time.time() - infer_timer))
