@@ -244,7 +244,7 @@ Currently, REGEN and HyPER-GAN are supported only with PyTorch, and therefore ch
 
 To train REGEN or HyPER-GAN models towards the characteristics of different datasets, please visit the official repositories ([REGEN](https://github.com/stefanos50/REGEN), [HyPER-GAN](https://github.com/stefanos50/HyPER-GAN)).
 
-> 📝 Note: It is still required to install an EPE pretrained model in order to use REGEN or HyPER-GAN methods. However, the EPE weights will be unloaded from the GPU if REGEN is selected.
+> 📝 Note: It is still required to install an EPE pretrained model in order to use REGEN or HyPER-GAN methods. However, the EPE weights will be unloaded from the GPU if REGEN or HyPER-GAN is selected.
 
 # Experimenting
 For experimenting with our code, we provide a `carla_config` file containing most of the parameters, along with a number of Python samples. In the next chapters, we will present some of the basic functionalities. More in-depth information for each parameter or function can be found via comments in the `code` or next to each parameter inside the `yaml` files.
