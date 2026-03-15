@@ -29,6 +29,8 @@ Except for autonomous driving simulation scenarios, the pretrained models includ
 
 ### Updates
 
+* **ToDo**: Add HyPER-GAN pretrained models for the CARLA simulator (currently, the pretrained models are trained on images from GTA V).
+* **16/03/2026**: Integrated [HyPER-GAN method](https://arxiv.org/abs/2603.10604), which can achieve 30 FPS at 1080p with an RTX 4070 Super GPU.
 * **16/12/2025**: Integrated [REGEN method](https://arxiv.org/abs/2508.17061) (Cityscapes, KITTI, and nuScenes) as an option for faster inference (see the documentation below).
 * **04/11/2025**: Added support for TensorRT through ONNX Runtime with improved inference speed (0.08 seconds with RTX 4090) and lower VRAM requirements (10 GB).
 * **03/11/2025**: Improved and simplified the object detection annotation algorithm by employing semantic and instance segmentation. Changed the annotation format from PASCAL VOC to YOLO.
@@ -232,17 +234,17 @@ python EPEExperiment.py infer <path-to>\code\config\infer_pfd2cs.yaml --log=info
 ```
 The `\code\config\carla_config.yaml` file contains all the available parameters, and it is mandatory to provide it as an argument when inferencing in real-time, but not in all other cases.
 
-# REGEN
+# REGEN/HyPER-GAN
 
-CARLA2Real now also supports inference with the **REGEN** method, which significantly improves performance compared to **EPE**, achieving inference speeds of **over 30 FPS**.
+CARLA2Real now also supports inference with the REGEN and HyPER-GAN methods, which significantly reduce the inference latency compared to EPE, achieving inference speeds of over 30 FPS.
 
-To use **REGEN**, open the `code/config/carla_config.yaml` file and change the `general/method` field from `EPE` to `REGEN`. In addition, update `REGEN_settings/checkpoint_name` with the name of one of the provided REGEN models, after installing the corresponding checkpoints in the `checkpoints/REGEN` directory.
+To use REGEN or HyPER-GAN, open the `code/config/carla_config.yaml` file and change the `general/method` field from `EPE` to `REGEN` or `HYPERGAN`. In addition, update `REGEN_settings/checkpoint_name` or `HYPERGAN_settings/checkpoint_name` with the name of one of the provided REGEN/HyPER-GAN models after installing the corresponding checkpoints in the `checkpoints/REGEN` or `checkpoints/HYPERGAN` directories.
 
-Currently, **REGEN is supported only with PyTorch**, and therefore changing the `compiler` parameter will have no effect when using this method.
+Currently, REGEN and HyPER-GAN are supported only with PyTorch, and therefore changing the `compiler` parameter will have no effect when using these methods.
 
-To train REGEN models towards to the characteristics of different datasets, please visit the [official REGEN repository](https://github.com/stefanos50/REGEN).
+To train REGEN or HyPER-GAN models towards the characteristics of different datasets, please visit the official repositories ([REGEN](https://github.com/stefanos50/REGEN), [HyPER-GAN](https://github.com/stefanos50/HyPER-GAN)).
 
-> 📝 **Note**: It is still required to install an EPE pretrained model in order to use REGEN method. However, the EPE weights will be unloaded from the GPU if REGEN is selected.
+> 📝 Note: It is still required to install an EPE pretrained model in order to use REGEN or HyPER-GAN methods. However, the EPE weights will be unloaded from the GPU if REGEN is selected.
 
 # Experimenting
 For experimenting with our code, we provide a `carla_config` file containing most of the parameters, along with a number of Python samples. In the next chapters, we will present some of the basic functionalities. More in-depth information for each parameter or function can be found via comments in the `code` or next to each parameter inside the `yaml` files.
