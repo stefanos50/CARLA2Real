@@ -16,6 +16,10 @@
   </a>
 </div>
 
+
+https://github.com/user-attachments/assets/ae4c912a-489a-447f-8507-3900bcf0db7c
+
+
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
 <div align="center">
