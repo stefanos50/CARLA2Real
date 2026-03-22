@@ -17,9 +17,6 @@
 </div>
 
 
-https://github.com/user-attachments/assets/ae4c912a-489a-447f-8507-3900bcf0db7c
-
-
 This project originated as part of a Master's Thesis within the "Digital Media - Computational Intelligence" program at the Computer Science Department of Aristotle University of Thessaloniki.
 
 <div align="center">
@@ -31,9 +28,16 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 Except for autonomous driving simulation scenarios, the pretrained models included in this repository have been employed (and tested) for crowd simulation through Closed-Circuit Television (CCTV) and Body Worn Cameras (BWC) in indoor environments rendered with Unreal Engine 5. If you are interested in enhancing the photorealism of a synthetic dataset that is not related to the domain of autonomous driving, we suggest reading our latest publication, ["Photorealistic Synthetic Crowds Simulation in Indoor environments (PSCS-I): a novel synthetic dataset for realistic simulation of crowd panic and violence behaviors"](https://ieeexplore.ieee.org/document/11267404) [[code]](https://github.com/stefanos50/PSCS-I) [[Sample Data]](https://www.kaggle.com/datasets/stefanospasios/synthetic-crowds-simulation-pscs-i).
 
+### Diffusion Models
+
+Below is a real-time demo (RTX 4070S) of REGEN trained to translate CARLA towards the output of FLUX.2-klein-4B. Due to the more frequent inconsistencies of diffusion models (e.g., changing the color of the vehicles) compared to image-to-image translation, there are more frequent instances of temporal instability (e.g., flickering) compared to traditional image-to-image translation methods. However, these issues can be mitigated by leveraging more advanced, paid diffusion-based models, such as ChatGPT Image or Qwen Image 2.0.
+
+https://github.com/user-attachments/assets/ae4c912a-489a-447f-8507-3900bcf0db7c
+
+
 ### Updates
 
-* **ToDo**: Add HyPER-GAN pretrained models for the CARLA simulator (currently, the pretrained models are trained on images from GTA V).
+* **22/03/2026**: Added REGEN model trained on the output of FLUX.2-klein-4B.
 * **16/03/2026**: Integrated [HyPER-GAN method](https://arxiv.org/abs/2603.10604), which can achieve 30 FPS at 1080p with an RTX 4070 Super GPU.
 * **16/12/2025**: Integrated [REGEN method](https://arxiv.org/abs/2508.17061) (Cityscapes, KITTI, and nuScenes) as an option for faster inference (see the documentation below).
 * **04/11/2025**: Added support for TensorRT through ONNX Runtime with improved inference speed (0.08 seconds with RTX 4090) and lower VRAM requirements (10 GB).
