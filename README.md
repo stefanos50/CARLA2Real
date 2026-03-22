@@ -14,6 +14,13 @@
   <a href="https://www.kaggle.com/datasets/stefanospasios/carla2real-enhancing-the-photorealism-of-carla" target="_blank">
 <img alt="Static Badge" src="https://img.shields.io/badge/DATASET-cyan?style=for-the-badge&logo=kaggle&logoSize=auto">
   </a>
+      <a href="https://github.com/stefanos50/REGEN" target="_blank">
+<img alt="Static Badge" src="https://img.shields.io/badge/REGEN_Project-black?style=for-the-badge&logo=github&logoSize=auto">
+  </a>
+    </a>
+      <a href="https://github.com/stefanos50/HyPER-GAN" target="_blank">
+<img alt="Static Badge" src="https://img.shields.io/badge/HyPERGAN_Project-black?style=for-the-badge&logo=github&logoSize=auto">
+  </a>
 </div>
 
 
