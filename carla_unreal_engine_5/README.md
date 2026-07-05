@@ -48,3 +48,16 @@ The final step is to enhance the data by running inference with the model. We pr
     python test.py --model_onnx <path-to>/carla2cityscapes-360000.onnx --dataset_directory <path-to>/CarlaUE5-EPE --out_path <path-to>/EPE
 ```
 > ⚠️ **Warning**: ONNX Runtime library will require a large amount of VRAM. If you have a limited amount of GPU VRAM then the inference should be performed with the PyTorch code as described in the [CARLA2Real readme](https://github.com/stefanos50/CARLA2Real).
+
+```
+@INPROCEEDINGS{11226280,
+  author={Pasios, Stefanos and Nikolaidis, Nikos},
+  booktitle={2025 33rd European Signal Processing Conference (EUSIPCO)}, 
+  title={Enhancing Photorealism in Carla Autonomous Driving Simulator}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={671-675},
+  keywords={Photorealism;Visualization;Translation;Semantic segmentation;Training data;Europe;Signal processing;Rendering (computer graphics);Engines;Synthetic data;Sim2real gap;CARLA;Semantic Segmentation;Autonomous Driving;Image-to-image Translation;Photorealism Enhancement},
+  doi={10.23919/EUSIPCO63237.2025.11226280}}
+```
