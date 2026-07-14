@@ -41,9 +41,9 @@ Below is a real-time demo (RTX 4070S) of REGEN trained to translate CARLA toward
 
 https://github.com/user-attachments/assets/4b440fdc-43a0-4b4e-b780-36c65a621aca
 
-CARLA2Real now also supports the photorealism enhancement of the synthetic data using [Hybrid-Sim2Real](https://arxiv.org/abs/2605.02291), which combines the strong geometry and material updates of diffusion models (i.e., FLUX.2-klein-4B) with the data distribution alignment of image-to-image translation methods (i.e., REGEN and HyPER-GAN). Below is an example of an image from the VKITTI dataset translated with Hybrid-Sim2Real towards the real-world KITTI dataset.
+CARLA2Real now also supports the photorealism enhancement of the synthetic data using [Hybrid-Sim2Real](https://arxiv.org/abs/2605.02291), which combines the strong geometry and material updates of diffusion models (i.e., FLUX.2-klein-4B) with the data distribution alignment of image-to-image translation methods (i.e., REGEN and HyPER-GAN). Below is an example of an image from CARLA translated with Hybrid-Sim2Real towards the real-world KITTI dataset.
 
-<img width="1000" height="214" alt="vkitti_sample" src="https://github.com/user-attachments/assets/b4eb04af-fe97-4ac2-85f0-0faf1e14bb6a" />
+<img width="1216" height="337" alt="carla_hybrid_sim2real" src="https://github.com/user-attachments/assets/1c672c05-5dfa-47f0-b75d-1a10a0b9e732" />
 
 ### Extending the models to other domains
 
@@ -323,12 +323,6 @@ python enhancer.py
 ```
 
 The results will be saved in the `HybridSim2Real` directory inside the dataset path specified in `dataset_path` inside `\code\config\carla_config.yaml`.
-
-Below is an example of YOLO26-SEG trained (without employing the pretrained weights) on the real-world KITTI dataset and the combination of the real-world KITTI and the photorealism-enhanced (by Hybrid-Sim2Real) VKITTI2 dataset.
-
-
-https://github.com/user-attachments/assets/8d141464-ba86-4361-be7e-bc1a1249d516
-
 
 > 📝 Note: For enhancing the photorealism of unrealated with CARLA datasets, visit Hybrid-Sim2Real [repository](https://github.com/stefanos50/Hybrid-Sim2Real).
 
