@@ -43,7 +43,7 @@ https://github.com/user-attachments/assets/4b440fdc-43a0-4b4e-b780-36c65a621aca
 
 CARLA2Real now also supports the photorealism enhancement of the synthetic data using [Hybrid-Sim2Real](https://arxiv.org/abs/2605.02291), which combines the strong geometry and material updates of diffusion models (i.e., FLUX.2-klein-4B) with the data distribution alignment of image-to-image translation methods (i.e., REGEN and HyPER-GAN). Below is an example of an image from CARLA translated with Hybrid-Sim2Real towards the real-world KITTI dataset.
 
-<img width="1216" height="337" alt="carla_hybrid_sim2real" src="https://github.com/user-attachments/assets/1c672c05-5dfa-47f0-b75d-1a10a0b9e732" />
+<img width="1216" height="328" alt="carla_hybrid_sim2real" src="https://github.com/user-attachments/assets/aea2b1e3-272a-4724-b9f3-c7a580a1deea" />
 
 ### Extending the models to other domains
 
