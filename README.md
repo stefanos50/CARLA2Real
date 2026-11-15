@@ -36,7 +36,7 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 ### Diffusion Models
 
-Below is a real-time demo (RTX 4070S) of REGEN trained to translate CARLA towards the output of [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B). Due to the more frequent inconsistencies of diffusion models (e.g., changing the color of the vehicles) compared to image-to-image translation, there are more frequent instances of temporal instability (e.g., flickering) compared to traditional image-to-image translation methods. However, these issues can be mitigated by leveraging more advanced, paid diffusion-based models, such as ChatGPT Image or Qwen Image 2.0.
+Below is a demo (RTX 4070S) of REGEN trained to translate CARLA (left) towards the output of [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) (middle), and HyPER-GAN towards the output of [DLSS 5.0](https://www.nvidia.com/en-eu/geforce/technologies/dlss/) (right). Due to the more frequent inconsistencies of some diffusion models such as FLUX.2-klein-4B (e.g., changing the color of vehicles) compared to image-to-image translation, there are frequent instances of temporal instability (e.g., flickering). However, with DLSS 5.0, which is semantically and temporally consistent and primarily changes the lighting and materials of the scene rather than its geometry, temporal stability is significantly improved.
 
 https://github.com/user-attachments/assets/9aaa8c29-5cc9-42aa-9851-42f81adfdef3
 
@@ -52,6 +52,7 @@ Except for autonomous driving simulation scenarios, the pretrained models includ
 
 ### Updates
 
+* **15/11/2026**: Added HyPER-GAN model trained on the output of DLSS 5.0.
 * **25/05/2026**: Added code for [Hybrid-Sim2Real](https://arxiv.org/abs/2605.02291) that further improves photorealism for frame-level algorithms (e.g., semantic segmentation).
 * **22/03/2026**: Added REGEN model trained on the output of FLUX.2-klein-4B.
 * **16/03/2026**: Integrated [HyPER-GAN method](https://arxiv.org/abs/2603.10604), which can achieve 30 FPS at 1080p with an RTX 4070 Super GPU.
