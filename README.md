@@ -36,7 +36,7 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 ### Diffusion Models
 
-Below is a demo (RTX 4070S) of REGEN trained to translate CARLA (left) towards the output of [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) (middle), and HyPER-GAN towards the output of [DLSS 5.0](https://www.nvidia.com/en-eu/geforce/technologies/dlss/) (right). Due to the more frequent inconsistencies of some diffusion models such as FLUX.2-klein-4B (e.g., changing the color of vehicles) compared to image-to-image translation, there are frequent instances of temporal instability (e.g., flickering). However, with DLSS 5.0, which is semantically and temporally consistent and primarily changes the lighting and materials of the scene rather than its geometry, temporal stability is significantly improved.
+Below is a demo of REGEN trained to translate CARLA (left) towards the output of [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) (middle), and HyPER-GAN towards the output of [DLSS 5.0](https://www.nvidia.com/en-eu/geforce/technologies/dlss/) (right). Due to the more frequent inconsistencies of some diffusion models such as FLUX.2-klein-4B (e.g., changing the color of vehicles) compared to image-to-image translation, there are frequent instances of temporal instability (e.g., flickering). However, with DLSS 5.0, which is semantically and temporally consistent and primarily changes the lighting and materials of the scene rather than its geometry, temporal stability is significantly improved.
 
 https://github.com/user-attachments/assets/9aaa8c29-5cc9-42aa-9851-42f81adfdef3
 
