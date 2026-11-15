@@ -38,8 +38,8 @@ This project originated as part of a Master's Thesis within the "Digital Media -
 
 Below is a real-time demo (RTX 4070S) of REGEN trained to translate CARLA towards the output of [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B). Due to the more frequent inconsistencies of diffusion models (e.g., changing the color of the vehicles) compared to image-to-image translation, there are more frequent instances of temporal instability (e.g., flickering) compared to traditional image-to-image translation methods. However, these issues can be mitigated by leveraging more advanced, paid diffusion-based models, such as ChatGPT Image or Qwen Image 2.0.
 
+https://github.com/user-attachments/assets/9aaa8c29-5cc9-42aa-9851-42f81adfdef3
 
-https://github.com/user-attachments/assets/4b440fdc-43a0-4b4e-b780-36c65a621aca
 
 CARLA2Real now also supports the photorealism enhancement of the synthetic data using [Hybrid-Sim2Real](https://arxiv.org/abs/2605.02291), which combines the strong geometry and material updates of diffusion models (i.e., FLUX.2-klein-4B) with the data distribution alignment of image-to-image translation methods (i.e., REGEN and HyPER-GAN). Below is an example of an image from CARLA translated with Hybrid-Sim2Real towards the real-world KITTI dataset.
 
